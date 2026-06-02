@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#f6f2ea" />
+    <meta name="description" content="Plan personnel de rééducation du genou droit — document de travail évolutif. Phase 1 : réveil neuromusculaire et récupération de l'extension." />
+    <meta name="robots" content="noindex" />
+    <title>Plan de rééducation — Genou droit · Phase 1</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <a href="#main" class="skip-link">Aller au contenu</a>
+
+    <header class="masthead" role="banner">
+      <div class="shell">
+        <p class="masthead__overline">
+          <span class="dot" aria-hidden="true"></span>
+          Document de travail · Évolutif
+        </p>
+        <h1 class="masthead__title">
+          Plan de rééducation
+          <span class="masthead__title-sep" aria-hidden="true">—</span>
+          <span class="masthead__title-sub">Genou droit</span>
+        </h1>
+        <p class="masthead__phase" id="phase-tagline" aria-live="polite">
+          <span data-tagline-prefix>Phase 1</span>
+          <span class="masthead__phase-sep" aria-hidden="true">·</span>
+          <span data-tagline-title>Réveil neuromusculaire &amp; récupération de l'extension</span>
+        </p>
+        <dl class="masthead__meta">
+          <div>
+            <dt>Patient</dt>
+            <dd>Julien F.&nbsp;D. Gaichet</dd>
+          </div>
+          <div>
+            <dt>Session</dt>
+            <dd>2 juin 2026</dd>
+          </div>
+          <div>
+            <dt>Statut</dt>
+            <dd id="masthead-status">Phase 1 en cours</dd>
+          </div>
+        </dl>
+
+        <aside class="disclaimer" role="note">
+          <p>
+            <strong>À lire en premier.</strong> Ce document n'est ni un diagnostic ni une prescription
+            de kinésithérapie. C'est un cadre de réflexion et un plan de travail construit à partir du
+            dossier genou et d'un échange de cadrage. Tout y est dosé sur le principe :
+            <em>jamais de douleur, on s'arrête avant.</em> Un professionnel de santé reste l'arbitre,
+            surtout dès qu'un accès kiné&nbsp;/ médecine du sport est possible.
+          </p>
+        </aside>
+      </div>
+    </header>
+
+    <nav class="stepper" aria-label="Phases de rééducation">
+      <div class="shell">
+        <ol class="stepper__list" id="stepper-list" role="tablist"></ol>
+      </div>
+    </nav>
+
+    <main id="main" class="panel-host">
+      <div class="shell">
+        <div id="panels" class="panels"></div>
+      </div>
+    </main>
+
+    <footer class="footer" role="contentinfo">
+      <div class="shell">
+        <p>
+          Document personnel de travail — ne remplace pas l'avis d'un médecin.
+        </p>
+        <p class="footer__small">
+          Mis à jour au fil de la rééducation. Phases 2 à 4 ajoutées au passage des critères d'entrée.
+        </p>
+      </div>
+    </footer>
+
+    <noscript>
+      <div class="noscript">
+        <p>
+          Ce document est rendu en JavaScript pour pouvoir évoluer phase par phase.
+          Active JS pour le consulter, ou ouvre directement le PDF source.
+        </p>
+      </div>
+    </noscript>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,23 @@
+# OS / éditeur
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Vercel
+.vercel/
+
+# Node (au cas où tu ajoutes des outils plus tard)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Logs et temporaires
+*.log
+.cache/
+.tmp/
