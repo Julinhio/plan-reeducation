@@ -10,12 +10,22 @@ desktop.ini
 # Vercel
 .vercel/
 
-# Node (au cas où tu ajoutes des outils plus tard)
+# Node
 node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
+
+# Vite / build
+dist/
+dist-ssr/
+*.local
+
+# Env
+.env
+.env.local
+.env.*.local
 
 # Logs et temporaires
 *.log

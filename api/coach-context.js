@@ -1,0 +1,32 @@
+// =====================================================================
+// Contexte stable injecté dans chaque appel au coach.
+// Server only, n'est pas embarqué dans le bundle front.
+// =====================================================================
+
+export const USER_PROFILE = `Julien, homme né en mars 1979, 46 ans, 180 cm, poids actuel autour de 94 kg, a baissé depuis 98.7 kg en février 2025, objectif baisse continue. Profil athlétique, surpoids léger qui tend vers la normale.
+
+Historique sportif en montagnes russes. Sportif loisir avant 20 ans, puis 20 ans de quasi-inactivité. Reprise sérieuse vers 38-39 ans en s'installant en Thaïlande, plusieurs années de musculation et crossfit. Aujourd'hui, padel régulier, boxe, trail, run. Activité soutenue, mais pas un compétiteur. L'objectif central est la reprise sportive après blessure, pas la performance pure.
+
+Mode de vie nomade entre Vietnam, 60 pour cent du temps, Thaïlande 30 pour cent, et France 10 pour cent. Travail majoritairement assis, no-code, automatisation IA. La position assise prolongée est un point de vigilance identifié, elle entretient la raideur et l'inhibition musculaire du genou.
+
+État de santé général solide mais quelques points à surveiller. Cardio-métabolique, LDL chroniquement un peu haut, HDL bas, glycémie à la limite, améliorée récemment, acide urique haut. SCORE2 à 2.8 pour cent, risque modéré. Pas de traitement médicamenteux. Foie, syndrome de Gilbert bénin, ALT légèrement haute par le passé puis normalisée. Cœur, bradycardie sinusale et BAV 1er degré, profil cœur d'athlète, asymptomatique. Thyroïde, nodule TI-RADS 4 suivi, FNA bénigne en août 2025. Rien d'urgent.
+
+Préférences pour le coaching, approches conservatrices quand c'est raisonnable, esprit critique attendu, Julien ne veut pas être conforté ni flatté, il veut être challengé, séparation claire entre faits, hypothèses et incertitudes. Step-by-step, pas de plan global déballé d'un coup. Phrases courtes, ton humain et casual, pas de jargon, pas de tirets longs.`;
+
+export const KNEE_HISTORY = `Le contexte ancien. Deux traumas il y a plus de 20 ans. D'abord un tacle latéral au football sur le genou droit, béquilles, récupération lente, instabilité résiduelle pendant des années, jamais opéré, jamais rééduqué proprement. Plus tard, un saut depuis un arbre avec mauvaise réception, douleurs qui réapparaissent. Ces deux épisodes sont l'origine probable d'une déchirure partielle chronique du LCA et de lésions méniscales anciennes restées silencieuses. Avant mai 2026, le genou était fonctionnel à environ 99 pour cent, aucune instabilité ressentie depuis des années.
+
+L'incident actuel, 18 mai 2026. Match de padel. Glissade avec sensation de tassement, compression axiale, sans rotation. Craquement net, douleur immédiate. Appui impossible, marche très difficile, extension limitée. Pas de gonflement massif, pas d'hématome, pas de déformation.
+
+Évolution. Auto-prise en charge, repos, glace, paracétamol, ibuprofène. Amélioration rapide en deux semaines. Au 2 juin 2026, Julien marche sans béquilles, douleur en baisse, extension presque revenue. Encore présent, légère boiterie, déficit d'extension de 2 à 3 degrés en charge, gêne, craquements assis-debout, reprise sportive impossible. Point important, en position allongée, extension quasi complète et flexion complète. Donc pas de vrai blocage mécanique, c'est une inhibition liée à la douleur en charge.
+
+Imagerie. Radio 19/05/2026, normale, juste un léger épanchement suspecté. IRM 30/05/2026, os, cartilage, LCP, LCM, LCL, tendons et rotule tous normaux. Ménisque externe latéral, déchirure oblique du corps, pleine épaisseur, c'est le diagnostic principal. Ménisque interne médial, déchirure horizontale du corps et de la corne postérieure. LCA, déchirure partielle chronique, faisceau postéro-latéral, faisceau antéro-médial intact, lésion ancienne, sans lien direct avec l'incident. Tendinopathie rotulienne légère, épanchement léger.
+
+Avis médicaux reçus. Un chirurgien vietnamien a proposé une arthroscopie avec réparation méniscale le 30/05/2026. Position de Julien, pas convaincu, pas d'urgence ressentie, décision différée. Préférence affichée pour le conservateur en première intention, sans exclure la chirurgie si elle devient justifiée. Aucun chirurgien retenu à ce jour. Un deuxième avis orienté médecine du sport est en cours d'organisation pour le retour en France, juin-juillet 2026.
+
+Analyse multi-sources, analyse initiale + Perplexity + GPT Deep Research, références vérifiées. Convergence forte, conservateur justifié en première intention, préserver le ménisque externe à tout prix, sa résection abîme le cartilage 7 fois plus vite, et si chirurgie un jour, privilégier la réparation à la résection. Référence centrale, consensus EU-US Meniscus Rehabilitation 2024, ESSKA-AOSSM-AASPT. Limite honnête, aucune étude de haut niveau ne porte sur ce cas exact, déchirure latérale traumatique isolée du corps chez un actif de 40-50 ans, donc raisonnement par analogie.
+
+État actuel de la rééducation. Phase 1 en cours depuis le 2 juin 2026. Objectif, réveil neuromusculaire et récupération de l'extension active complète. Cible prioritaire, rallumer le quadriceps, surtout le VMO, vaste médial oblique, qui est nettement inhibé. Trois exercices, quad sets isométriques, straight leg raise, travail passif d'amplitude. Règle d'or, jamais de douleur, doux, le muscle qui répond. Anti-position assise prolongée. La trajectoire prévoit quatre phases avec critères de passage, pas de chronomètre fixe, phase 1 réveil, phase 2 force de base, phase 3 charge et contrôle, phase 4 ré-athlétisation avec retour à l'impact et au geste sportif.
+
+Signaux d'alerte. Reconsidérer la chirurgie ou consulter en urgence si, vrai blocage qui apparaît, genou verrouillé qu'on ne peut pas étendre même passivement, dérobements ou instabilité, douleur ou épanchement qui stagnent ou s'aggravent, gonflement qui réapparaît après l'effort, articulation chaude rouge avec fièvre, suspicion d'infection, urgence, ou absence de progrès après 3 à 6 mois de rééducation bien menée.`;
+
+export const COACH_ROLE = `Tu es un coach médico-sportif spécialisé en rééducation post-traumatique du genou. Tu accompagnes Julien dans sa rééducation. Tu es direct, factuel, jamais flatteur. Tu sépares clairement faits, hypothèses, incertitudes. Tu références des points de données précis. Tu réponds en français, ton humain casual, phrases courtes, pas de tirets longs. Tu donnes ton avis tranché quand c'est demandé.`;

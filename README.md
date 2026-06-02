@@ -1,98 +1,105 @@
-# Plan de rééducation — Genou droit
+# Plan de rééducation, Genou droit
 
-Site statique d'un plan personnel de rééducation, évolutif sur 4 phases.
-Aujourd'hui seule la phase 1 est rédigée ; les phases 2 à 4 sont des panneaux
-« à venir » prêts à être remplis au fil de la rééducation.
+App de suivi de rééducation, 4 phases. Lecture du protocole, tracking quotidien
+des exercices, journal, courbes de progression, critères d'entrée vers la phase
+suivante. Mono-utilisateur, gate par mot de passe côté front.
 
-Pas de framework, pas de build. HTML/CSS/JS vanilla, modules ES.
+Stack, Vite + React + Tailwind v4 + Supabase. Hébergement Vercel.
 
-## Structure
-
-```
-.
-├── index.html              # coquille, masthead, stepper, footer
-├── styles.css              # tout le design system
-├── app.js                  # moteur : stepper, panneaux, sub-nav scroll
-├── content/
-│   ├── phases.js           # registre des 4 phases
-│   ├── phase-1.js          # contenu complet de la phase active
-│   ├── phase-2.js          # placeholder « à venir »
-│   ├── phase-3.js          # placeholder « à venir »
-│   └── phase-4.js          # placeholder « à venir »
-├── vercel.json             # cleanUrls + cache + headers de base
-└── .gitignore
-```
-
-## Ajouter une nouvelle phase
-
-Tout est isolé : pas besoin de toucher au HTML ni au moteur.
-
-1. Ouvre `content/phase-2.js` (ou 3, 4).
-2. Passe `meta.status` de `"upcoming"` à `"active"` et `statusLabel` à
-   `"En cours"`.
-3. Remplis `toc` (les ancres de la sub-nav latérale) et remplace `render()`
-   par le contenu de la phase, en réutilisant les patterns de `phase-1.js` :
-   - `<section class="section" id="...">` avec `section__overline`,
-     `section__title`, `section__body`.
-   - Tests : helper `testCard({...})`.
-   - Exercices : helper `exercise({...})`.
-   - Encadrés : `<aside class="callout callout--conclusion|rule|compass">`.
-   - Tableau alerte : `<div class="alert-table">…</div>`.
-
-Le stepper du haut, la couleur active, la tagline du masthead, le sub-nav et
-l'indicateur au scroll se mettent à jour tout seuls.
-
-## Déploiement Vercel
-
-1. Lie ce dossier au repo GitHub `Julinhio/plan-reeducation` :
-
-   ```bash
-   git init
-   git remote add origin https://github.com/Julinhio/plan-reeducation.git
-   git add .
-   git commit -m "Phase 1 : réveil neuromusculaire"
-   git branch -M main
-   git push -u origin main
-   ```
-
-2. Sur [vercel.com/new](https://vercel.com/new), importe le repo.
-   - Framework Preset : **Other**
-   - Root Directory : `.`
-   - Build Command : *(vide)*
-   - Output Directory : *(vide)*
-
-   Vercel sert directement les fichiers statiques. `vercel.json` ajoute juste
-   du cache et quelques headers de base.
-
-3. Chaque push sur `main` déclenche un déploiement de prod. Les PR génèrent
-   des previews automatiques.
-
-## Développement local
-
-Comme on utilise des modules ES, ouvrir `index.html` au file:// ne fonctionne
-pas (CORS). Sers le dossier en local :
+## Setup local
 
 ```bash
-# Python 3
-python -m http.server 5500
-
-# ou Node, si installé
-npx serve .
+npm install
+cp .env.example .env.local
+# remplir VITE_APP_PASSWORD et vérifier VITE_SUPABASE_ANON_KEY
+npm run dev
 ```
 
-Puis ouvre `http://localhost:5500`.
+Si `VITE_APP_PASSWORD` est vide, l'app déverrouille toute seule en local.
+
+## Variables d'environnement
+
+```
+VITE_SUPABASE_URL       URL du projet Supabase
+VITE_SUPABASE_ANON_KEY  clé publique anon
+VITE_APP_PASSWORD       mot de passe d'accès à l'app
+```
+
+À déclarer en local dans `.env.local`, gitignored, et sur Vercel dans le projet.
+
+## Schéma Supabase
+
+Migrations dans `supabase/migrations/`. À lancer dans le SQL editor Supabase
+dans l'ordre.
+
+- `0001_init.sql`, crée les 4 tables et désactive RLS.
+- `0002_seed_phase2_criteria.sql`, seed des critères phase 1 vers phase 2.
+
+Les 4 tables sont accessibles par la clé `anon`, l'accès est protégé par le
+password côté app, pas au niveau base. C'est assumé pour ce projet perso.
+
+## Architecture
+
+```
+src/
+├── App.jsx                 routing par state, phase active + vue active
+├── content/                contenu structuré par phase, source de vérité métier
+│   ├── phases.js
+│   ├── phase-1.js          texte complet, exercices avec hints tracking
+│   ├── phase-2.js          placeholder upcoming
+│   ├── phase-3.js          placeholder upcoming
+│   └── phase-4.js          placeholder upcoming
+├── lib/
+│   ├── supabase.js         client
+│   ├── auth.js             password gate, localStorage
+│   ├── dates.js            helpers date-fns
+│   └── api/                queries groupées par domaine
+│       ├── sessions.js
+│       ├── journal.js
+│       ├── measurements.js
+│       └── criteria.js
+├── hooks/                  un hook par domaine, fetch + mutation
+├── components/
+│   ├── shell/              Masthead, Stepper, ViewTabs, PasswordGate, Footer
+│   ├── reading/            vue Lecture, fidèle au PDF
+│   ├── tracking/           vue Tracking + TimerWidget
+│   ├── journal/            vue Journal
+│   ├── progression/        vue Progression, charts recharts
+│   ├── criteria/           vue Critères
+│   └── ui/                 primitives partagées
+└── index.css               tokens Tailwind v4 @theme + helpers
+```
+
+## Ajouter une phase
+
+1. Édite `src/content/phase-X.js`.
+2. Passe `meta.status` de `"upcoming"` à `"active"` et `statusLabel` à `"En cours"`.
+3. Remplis `toc`, `intro`, `sections` en suivant le pattern de `phase-1.js`.
+4. Pour chaque exercice, renseigne le bloc `tracking` (sets, reps, timer optionnel, target par jour) pour qu'il apparaisse dans la vue Tracking.
+5. Ajoute en SQL les critères d'entrée vers la phase suivante dans `phase_criteria`.
+
+Tout le reste, stepper, vue Lecture, Tracking, Progression, Critères, se branche automatiquement.
 
 ## Design
 
-- Direction : document médical éditorial, sérieux et calme. Papier crème,
-  encre profonde, accents teal et ambre. Respiration > densité.
-- Typographie : Newsreader (display), IBM Plex Sans (corps), IBM Plex Mono
-  (étiquettes techniques) — chargées depuis Google Fonts.
-- Motion : transitions courtes (160-320 ms), easings custom, `scale(0.985)`
-  sur `:active`, `prefers-reduced-motion` respecté.
-- Responsive : sub-nav latérale sur desktop, repliée en chips sur mobile ;
-  stepper en 4 colonnes desktop, 2x2 sur mobile.
+Direction visuelle hérité du document éditorial d'origine, papier crème, encre
+profonde, accents teal, amber, moss, plum. Typo Newsreader display + IBM Plex
+Sans corps + IBM Plex Mono labels. Vues applicatives plus denses, mais sur la
+même palette. Micro-interactions Emil, scale 0.97 au press, ease-out custom,
+transitions sous 250 ms, stagger 50 ms à l'entrée.
+
+Responsive mobile obligatoire, le tracking se fait souvent depuis le téléphone.
+
+## Build et déploiement
+
+```bash
+npm run build       # produit dist/
+npm run preview     # sert dist/ en local
+```
+
+Vercel build avec les défauts Vite. Le `vercel.json` route tout sur
+`index.html` pour le SPA.
 
 ## Avertissement
 
-Document personnel de travail. Ne remplace pas l'avis d'un médecin.
+Document personnel de travail, ne remplace pas l'avis d'un médecin.
