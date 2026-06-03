@@ -7,8 +7,10 @@ import JournalHistory from "./JournalHistory.jsx";
 
 export default function JournalView() {
   const [dateKey, setDateKey] = useState(toDateKey(new Date()));
-  const { entry, loading, save } = useJournalEntry(dateKey);
-  const { entries, reload: reloadHistory } = useJournalHistory(60);
+  const { entry, loading, save, reload: reloadEntry } =
+    useJournalEntry(dateKey);
+  const { entries, reload: reloadHistory, removeByDate } =
+    useJournalHistory(60);
 
   const handleSave = useCallback(
     async (payload) => {
@@ -16,6 +18,17 @@ export default function JournalView() {
       reloadHistory();
     },
     [save, reloadHistory]
+  );
+
+  const handleDelete = useCallback(
+    async (deletedDateKey) => {
+      await removeByDate(deletedDateKey);
+      if (deletedDateKey === dateKey) {
+        // L'entrée courante a été supprimée, on reset le formulaire.
+        reloadEntry();
+      }
+    },
+    [removeByDate, dateKey, reloadEntry]
   );
 
   return (
@@ -52,6 +65,7 @@ export default function JournalView() {
             entries={entries}
             currentDateKey={dateKey}
             onSelect={setDateKey}
+            onDelete={handleDelete}
           />
         </div>
       </aside>

@@ -3,15 +3,15 @@
 // Server only, n'est pas embarqué dans le bundle front.
 // =====================================================================
 
-export const USER_PROFILE = `Julien, homme né en mars 1979, 46 ans, 180 cm, poids actuel autour de 94 kg, a baissé depuis 98.7 kg en février 2025, objectif baisse continue. Profil athlétique, surpoids léger qui tend vers la normale.
+export const USER_PROFILE = `Julien, homme né en mars 1979, 47 ans, 180 cm, poids actuel autour de 95 kg, a baissé depuis 99.7 kg en février 2025 (et plus de 106kg depuis 2015), objectif baisse continue. Profil athlétique, surpoids léger qui se bat pour revenir vers la normale.
 
-Historique sportif en montagnes russes. Sportif loisir avant 20 ans, puis 20 ans de quasi-inactivité. Reprise sérieuse vers 38-39 ans en s'installant en Thaïlande, plusieurs années de musculation et crossfit. Aujourd'hui, padel régulier, boxe, trail, run. Activité soutenue, mais pas un compétiteur. L'objectif central est la reprise sportive après blessure, pas la performance pure.
+Historique sportif depuis la petite quarantaine (38-39 ans). Sportif loisir avant 20 ans, puis 20 ans de quasi-inactivité, notamment à cause de problèmes au genou et au dos. Reprise sérieuse vers 38-39 ans en s'installant en Thaïlande, plusieurs années de musculation et crossfit. Aujourd'hui, padel régulier, boxe, trail, run. Activité soutenue, mais pas un compétiteur. L'objectif central est la reprise sportive après blessure, pas la performance pure.
 
-Mode de vie nomade entre Vietnam, 60 pour cent du temps, Thaïlande 30 pour cent, et France 10 pour cent. Travail majoritairement assis, no-code, automatisation IA. La position assise prolongée est un point de vigilance identifié, elle entretient la raideur et l'inhibition musculaire du genou.
+Mode de vie nomade entre Vietnam (60 %), Thaïlande (30 %), et France (10 %). Travail assis, no-code, automatisation IA. La position assise prolongée est un point de vigilance identifié, elle entretient la raideur et l'inhibition musculaire du genou.
 
 État de santé général solide mais quelques points à surveiller. Cardio-métabolique, LDL chroniquement un peu haut, HDL bas, glycémie à la limite, améliorée récemment, acide urique haut. SCORE2 à 2.8 pour cent, risque modéré. Pas de traitement médicamenteux. Foie, syndrome de Gilbert bénin, ALT légèrement haute par le passé puis normalisée. Cœur, bradycardie sinusale et BAV 1er degré, profil cœur d'athlète, asymptomatique. Thyroïde, nodule TI-RADS 4 suivi, FNA bénigne en août 2025. Rien d'urgent.
 
-Préférences pour le coaching, approches conservatrices quand c'est raisonnable, esprit critique attendu, Julien ne veut pas être conforté ni flatté, il veut être challengé, séparation claire entre faits, hypothèses et incertitudes. Step-by-step, pas de plan global déballé d'un coup. Phrases courtes, ton humain et casual, pas de jargon, pas de tirets longs.`;
+Préférences pour le coaching, médecines douces et naturelles, approches conservatrices quand c'est raisonnable, esprit critique attendu, Julien ne veut pas être conforté ni flatté, il veut être challengé, séparation claire entre faits, hypothèses et incertitudes. Step-by-step, pas de plan global déballé d'un coup. Phrases courtes, ton humain et casual, pas de jargon, pas de tirets longs.`;
 
 export const KNEE_HISTORY = `Le contexte ancien. Deux traumas il y a plus de 20 ans. D'abord un tacle latéral au football sur le genou droit, béquilles, récupération lente, instabilité résiduelle pendant des années, jamais opéré, jamais rééduqué proprement. Plus tard, un saut depuis un arbre avec mauvaise réception, douleurs qui réapparaissent. Ces deux épisodes sont l'origine probable d'une déchirure partielle chronique du LCA et de lésions méniscales anciennes restées silencieuses. Avant mai 2026, le genou était fonctionnel à environ 99 pour cent, aucune instabilité ressentie depuis des années.
 

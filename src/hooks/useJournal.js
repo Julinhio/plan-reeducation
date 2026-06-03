@@ -64,5 +64,10 @@ export function useJournalHistory(limit = 60) {
     reload();
   }, [reload]);
 
-  return { entries, loading, error, reload };
+  const removeByDate = useCallback(async (dateKey) => {
+    await deleteEntry(dateKey);
+    setEntries((prev) => prev.filter((e) => e.entry_date !== dateKey));
+  }, []);
+
+  return { entries, loading, error, reload, removeByDate };
 }

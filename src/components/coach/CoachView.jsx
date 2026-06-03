@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useCoachAnalyses } from "../../hooks/useCoachAnalyses.js";
 import { Label, Textarea } from "../ui/Field.jsx";
 import PresetButtons, { PRESETS } from "./PresetButtons.jsx";
@@ -11,6 +11,34 @@ export default function CoachView() {
   const [prompt, setPrompt] = useState("");
   const [model, setModel] = useState(DEFAULT_MODEL_ID);
   const [localError, setLocalError] = useState(null);
+  const [expandedIds, setExpandedIds] = useState(() => new Set());
+  const seededRef = useRef(false);
+
+  // À la première arrivée des analyses, déplier la plus récente.
+  useEffect(() => {
+    if (seededRef.current || analyses.length === 0) return;
+    seededRef.current = true;
+    setExpandedIds(new Set([analyses[0].id]));
+  }, [analyses]);
+
+  // Quand une nouvelle analyse arrive, la déplier sans toucher aux autres.
+  useEffect(() => {
+    if (!newestId) return;
+    setExpandedIds((prev) => {
+      const next = new Set(prev);
+      next.add(newestId);
+      return next;
+    });
+  }, [newestId]);
+
+  function toggleExpanded(id) {
+    setExpandedIds((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
+  }
 
   async function runWith({ promptType, userPrompt }) {
     setLocalError(null);
@@ -115,10 +143,15 @@ export default function CoachView() {
             Pas encore d'analyse, lance un preset ou pose ta question.
           </p>
         ) : (
-          <ol className="flex flex-col gap-4">
+          <ol className="flex flex-col gap-3">
             {analyses.map((a) => (
               <li key={a.id}>
-                <AnalysisCard analysis={a} isNewest={a.id === newestId} />
+                <AnalysisCard
+                  analysis={a}
+                  isNewest={a.id === newestId}
+                  expanded={expandedIds.has(a.id)}
+                  onToggle={() => toggleExpanded(a.id)}
+                />
               </li>
             ))}
           </ol>
