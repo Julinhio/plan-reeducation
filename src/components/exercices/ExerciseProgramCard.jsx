@@ -7,7 +7,7 @@ export default function ExerciseProgramCard({
   exercise,
   phaseId,
   dateKey,
-  todaysSessions,
+  todaysSessions = [],
   onAdd,
   onRemove,
 }) {
@@ -34,6 +34,14 @@ export default function ExerciseProgramCard({
       Math.round((values.reduce((a, b) => a + b, 0) / values.length) * 10) / 10
     );
   }, [todaysSessions]);
+
+  function resetForm() {
+    setSets(t.defaultSets ?? null);
+    setReps(t.defaultReps ?? null);
+    setDuration(t.defaultDuration ?? null);
+    setSensation(7);
+    setNotes("");
+  }
 
   async function handleLog(e) {
     e.preventDefault();
@@ -173,12 +181,12 @@ export default function ExerciseProgramCard({
                 title={s.notes || ""}
               >
                 <span className="text-ink font-medium">#{i + 1}</span>
-                {s.sets && s.reps && (
+                {s.sets != null && s.reps != null && (
                   <span>
                     {s.sets}×{s.reps}
                   </span>
                 )}
-                {s.duration_sec && <span>{s.duration_sec}s</span>}
+                {s.duration_sec != null && <span>{s.duration_sec}s</span>}
                 {typeof s.sensation === "number" && (
                   <span className="text-accent-bright">{s.sensation}/10</span>
                 )}
@@ -272,7 +280,10 @@ export default function ExerciseProgramCard({
             </button>
             <button
               type="button"
-              onClick={() => setLogging(false)}
+              onClick={() => {
+                resetForm();
+                setLogging(false);
+              }}
               className="px-4 py-2 rounded-xl bg-transparent text-ink-soft text-sm font-medium btn-press hover:bg-paper-deep"
             >
               Annuler

@@ -116,7 +116,7 @@ function SectionRenderer({ section, isFirst }) {
             <Html as="p" html={section.callout.intro} className="text-ink-soft leading-relaxed" />
             <Html as="p" html={section.callout.prompt} className="text-ink-soft leading-relaxed" />
             <ul className="flex flex-col gap-2">
-              {section.callout.bullets.map((b, i) => (
+              {section.callout.bullets?.map((b, i) => (
                 <li
                   key={i}
                   className="relative pl-5 leading-relaxed text-[15px] text-ink-soft"
