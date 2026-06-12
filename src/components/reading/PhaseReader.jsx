@@ -2,7 +2,6 @@ import Html from "../ui/Html.jsx";
 import TocSidebar from "./TocSidebar.jsx";
 import TestCard from "./TestCard.jsx";
 import Callout, { CalloutHtml } from "./Callout.jsx";
-import ExerciseCard from "./ExerciseCard.jsx";
 import TargetBlock from "./TargetBlock.jsx";
 import AlertTable from "./AlertTable.jsx";
 import UpcomingPanel from "./UpcomingPanel.jsx";
@@ -40,8 +39,8 @@ export default function PhaseReader({ phase }) {
 function PhaseIntro({ intro }) {
   return (
     <header className="pb-12 border-b border-rule-soft mb-12">
-      <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-teal-deep inline-flex items-center gap-2">
-        <span className="h-px w-4 bg-teal" />
+      <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-accent-bright inline-flex items-center gap-2">
+        <span className="h-px w-4 bg-accent" />
         {intro.tagline}
       </p>
       <h2 className="font-display font-medium text-[clamp(1.8rem,1.55rem+1.2vw,2.55rem)] leading-tight tracking-tight text-ink mt-3">
@@ -58,7 +57,7 @@ function SectionRenderer({ section, isFirst }) {
   const headerBlock = (
     <>
       <p className="flex items-baseline gap-3 font-mono text-[11px] uppercase tracking-[0.14em] text-ink-mute mb-3">
-        <span className="text-teal-deep font-medium">{section.overlineNum}</span>
+        <span className="text-accent-bright font-medium">{section.overlineNum}</span>
         <span>{section.overlineLabel}</span>
       </p>
       <h3 className="font-display text-[clamp(1.45rem,1.3rem+0.7vw,1.85rem)] font-medium leading-tight tracking-tight text-ink max-w-[24ch]">
@@ -108,40 +107,31 @@ function SectionRenderer({ section, isFirst }) {
         </div>
       )}
 
-      {section.type === "exercises" && (
-        <>
-          <div className="flex flex-col gap-5 mt-8">
-            {section.exercises.map((ex) => (
-              <ExerciseCard key={ex.key} exercise={ex} />
-            ))}
-          </div>
-          {section.ruleCallout && (
-            <div className="mt-8 max-w-[68ch]">
-              <Callout
-                variant={section.ruleCallout.variant}
-                label={section.ruleCallout.label}
-              >
-                <Html as="p" html={section.ruleCallout.intro} className="text-ink leading-relaxed" />
-                <Html as="p" html={section.ruleCallout.prompt} className="text-ink leading-relaxed" />
-                <ul className="flex flex-col gap-2">
-                  {section.ruleCallout.bullets.map((b, i) => (
-                    <li
-                      key={i}
-                      className="relative pl-5 leading-relaxed text-[15px]"
-                    >
-                      <span
-                        className="absolute left-0 top-[0.7em] w-2 h-px bg-current opacity-45"
-                        aria-hidden
-                      />
-                      <Html as="span" html={b} />
-                    </li>
-                  ))}
-                </ul>
-                <Html as="p" html={section.ruleCallout.outro} className="text-ink leading-relaxed" />
-              </Callout>
-            </div>
-          )}
-        </>
+      {section.type === "callout" && section.callout && (
+        <div className="mt-8 max-w-[68ch]">
+          <Callout
+            variant={section.callout.variant}
+            label={section.callout.label}
+          >
+            <Html as="p" html={section.callout.intro} className="text-ink-soft leading-relaxed" />
+            <Html as="p" html={section.callout.prompt} className="text-ink-soft leading-relaxed" />
+            <ul className="flex flex-col gap-2">
+              {section.callout.bullets.map((b, i) => (
+                <li
+                  key={i}
+                  className="relative pl-5 leading-relaxed text-[15px] text-ink-soft"
+                >
+                  <span
+                    className="absolute left-0 top-[0.7em] w-2 h-px bg-current opacity-45"
+                    aria-hidden
+                  />
+                  <Html as="span" html={b} />
+                </li>
+              ))}
+            </ul>
+            <Html as="p" html={section.callout.outro} className="text-ink-soft leading-relaxed" />
+          </Callout>
+        </div>
       )}
 
       {section.type === "rule-and-alerts" && (

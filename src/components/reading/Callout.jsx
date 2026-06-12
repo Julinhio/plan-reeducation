@@ -14,10 +14,10 @@ const VARIANTS = {
     label: "text-moss-deep",
   },
   compass: {
-    bg: "bg-teal-wash",
-    border: "border-teal/25",
-    accent: "bg-teal",
-    label: "text-teal-deep",
+    bg: "bg-accent-wash",
+    border: "border-accent/25",
+    accent: "bg-accent",
+    label: "text-accent-bright",
   },
 };
 

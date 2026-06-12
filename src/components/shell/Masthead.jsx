@@ -19,7 +19,7 @@ export default function Masthead({ activePhase }) {
         >
           Plan de rééducation
           <span className="text-ink-faint font-normal mx-1">,</span>
-          <span className="italic text-teal-deep">Genou droit</span>
+          <span className="italic text-accent-bright">Genou droit</span>
         </h1>
 
         <p

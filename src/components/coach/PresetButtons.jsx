@@ -34,9 +34,9 @@ export default function PresetButtons({ onPick, disabled }) {
           type="button"
           onClick={() => onPick(p)}
           disabled={disabled}
-          className="text-left px-4 py-3 rounded-lg bg-paper-card border border-rule-soft hover:border-teal hover:bg-paper-soft btn-press disabled:opacity-50 disabled:cursor-not-allowed group"
+          className="text-left px-4 py-3 rounded-lg bg-paper-card border border-rule-soft hover:border-accent hover:bg-paper-soft btn-press disabled:opacity-50 disabled:cursor-not-allowed group"
         >
-          <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-ink-mute group-hover:text-teal-deep transition-colors">
+          <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-ink-mute group-hover:text-accent-bright transition-colors">
             Preset
           </p>
           <p className="font-display text-sm sm:text-base text-ink leading-snug mt-1">

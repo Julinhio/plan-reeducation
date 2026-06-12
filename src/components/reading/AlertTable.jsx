@@ -5,7 +5,7 @@ export default function AlertTable({ table }) {
     <div
       role="table"
       aria-label="Quand passer à la suite versus signaux d'alerte"
-      className="grid grid-cols-1 md:grid-cols-2 border border-rule-soft rounded-xl overflow-hidden bg-paper-card"
+      className="grid grid-cols-1 md:grid-cols-2 border border-rule-soft rounded-2xl overflow-hidden bg-paper-card"
     >
       <Column
         variant="go"

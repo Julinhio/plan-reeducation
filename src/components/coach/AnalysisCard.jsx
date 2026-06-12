@@ -54,8 +54,8 @@ export default function AnalysisCard({
       data-expanded={expanded ? "true" : "false"}
       onClick={collapsible ? handleCardClick : undefined}
       className={[
-        "rounded-xl border transition-all duration-200",
-        "data-[newest=true]:border-teal data-[newest=true]:animate-[coach-rise_350ms_cubic-bezier(0.23,1,0.32,1)_both]",
+        "rounded-2xl border transition-all duration-200",
+        "data-[newest=true]:border-accent data-[newest=true]:animate-[coach-rise_350ms_cubic-bezier(0.23,1,0.32,1)_both]",
         expanded
           ? "bg-paper-card border-rule-soft p-5 sm:p-7 flex flex-col gap-4 hover:border-rule-strong"
           : "bg-paper-soft border-rule-soft px-5 py-3.5 flex flex-col gap-2 cursor-pointer hover:bg-paper-card hover:border-rule-strong",
@@ -63,7 +63,7 @@ export default function AnalysisCard({
     >
       <header className="flex items-baseline justify-between gap-3 flex-wrap">
         <div className="flex items-baseline gap-3 flex-wrap min-w-0">
-          <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-teal-deep px-2 py-0.5 rounded-full bg-teal-wash border border-teal/20">
+          <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-accent-bright px-2 py-0.5 rounded-full bg-accent-wash border border-accent/20">
             {TYPE_LABEL[analysis.prompt_type] ?? analysis.prompt_type}
           </span>
           <span className="font-mono text-[11px] text-ink-mute">
@@ -78,7 +78,7 @@ export default function AnalysisCard({
             >
               <span
                 aria-hidden
-                className="w-1 h-1 rounded-full bg-teal-soft"
+                className="w-1 h-1 rounded-full bg-accent-soft"
               />
               {shortModelLabel(analysis.model_used)}
             </span>

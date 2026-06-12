@@ -77,7 +77,7 @@ export default function CriteriaView({ targetPhase }) {
             return (
               <li key={c.id}>
                 <article
-                  className={`bg-paper-card rounded-xl p-5 sm:p-6 border transition-colors duration-200 ${s.card}`}
+                  className={`bg-paper-card rounded-2xl p-5 sm:p-6 border transition-colors duration-200 ${s.card}`}
                 >
                   <div className="flex items-start justify-between gap-4 flex-wrap">
                     <div className="min-w-0 flex-1">
@@ -115,7 +115,7 @@ export default function CriteriaView({ targetPhase }) {
                             className={[
                               "px-3 py-1.5 rounded-full text-xs font-medium btn-press border",
                               isActive
-                                ? "bg-ink text-paper-soft border-ink"
+                                ? "bg-accent text-paper border-accent"
                                 : "bg-paper-soft text-ink-soft border-rule hover:border-rule-strong hover:text-ink",
                             ].join(" ")}
                           >

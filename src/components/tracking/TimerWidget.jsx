@@ -80,7 +80,7 @@ export default function TimerWidget({ label, durationSec }) {
         className={[
           "relative overflow-hidden rounded-full px-4 py-2 text-sm font-medium btn-press border min-w-[120px] text-left",
           running
-            ? "bg-teal text-paper-soft border-teal"
+            ? "bg-accent text-paper border-accent"
             : "bg-paper-soft text-ink border-rule hover:border-rule-strong",
         ].join(" ")}
         aria-label={running ? "Arrêter le timer" : `Démarrer ${label}`}
@@ -88,7 +88,7 @@ export default function TimerWidget({ label, durationSec }) {
         {running && (
           <span
             aria-hidden
-            className="absolute inset-y-0 left-0 bg-teal-deep/30"
+            className="absolute inset-y-0 left-0 bg-accent-bright/30"
             style={{
               width: `${pct}%`,
               transition: "width 100ms linear",

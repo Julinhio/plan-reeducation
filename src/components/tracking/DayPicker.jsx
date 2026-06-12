@@ -46,7 +46,7 @@ export default function DayPicker({ dateKey, onChange }) {
         <button
           type="button"
           onClick={() => onChange(toDateKey(new Date()))}
-          className="ml-1 px-3 py-1.5 rounded-full text-xs font-medium bg-teal text-paper-soft hover:bg-teal-deep btn-press"
+          className="ml-1 px-3 py-1.5 rounded-full text-xs font-medium bg-accent text-paper hover:bg-accent-bright btn-press"
         >
           Aujourd'hui
         </button>

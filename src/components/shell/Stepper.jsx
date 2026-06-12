@@ -38,7 +38,7 @@ export default function Stepper({ activePhaseId, onSelect }) {
                   className={[
                     "w-full text-left px-3 py-2.5 sm:py-3 rounded-lg flex items-center gap-3 btn-press border",
                     isActive
-                      ? "bg-paper-card border-teal text-ink shadow-sm"
+                      ? "bg-paper-card border-accent text-ink shadow-sm"
                       : "bg-transparent border-transparent text-ink-soft hover:bg-paper-soft hover:border-rule-soft hover:text-ink",
                   ].join(" ")}
                 >
@@ -46,7 +46,7 @@ export default function Stepper({ activePhaseId, onSelect }) {
                     className={[
                       "font-mono text-[11px] font-medium tracking-[0.06em] w-6 h-6 sm:w-7 sm:h-7 rounded-full grid place-items-center border flex-shrink-0",
                       isActive
-                        ? "bg-teal text-paper-soft border-teal"
+                        ? "bg-accent text-paper border-accent"
                         : "bg-paper-deep text-ink-mute border-rule",
                     ].join(" ")}
                   >
@@ -64,7 +64,7 @@ export default function Stepper({ activePhaseId, onSelect }) {
                       className={[
                         "font-mono text-[10px] uppercase tracking-[0.14em] leading-none",
                         isActive
-                          ? "text-teal-deep font-medium"
+                          ? "text-accent-bright font-medium"
                           : isUpcoming
                           ? "text-ink-faint"
                           : "text-ink-mute",

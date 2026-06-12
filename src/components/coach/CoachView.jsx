@@ -74,7 +74,7 @@ export default function CoachView() {
         </p>
       </header>
 
-      <div className="bg-paper-card border border-rule-soft rounded-xl p-5 sm:p-6 flex flex-col gap-5">
+      <div className="bg-paper-card border border-rule-soft rounded-2xl p-5 sm:p-6 flex flex-col gap-5">
         <div>
           <Label>Demandes préconfigurées</Label>
           <div className="mt-2">
@@ -107,12 +107,12 @@ export default function CoachView() {
               <button
                 type="submit"
                 disabled={asking || !prompt.trim()}
-                className="relative px-5 py-2.5 rounded-lg bg-ink text-paper-soft text-sm font-medium btn-press hover:bg-teal-deep disabled:opacity-60 disabled:cursor-not-allowed inline-flex items-center gap-2"
+                className="relative px-5 py-2.5 rounded-lg bg-accent text-paper text-sm font-medium btn-press hover:bg-accent-bright disabled:opacity-60 disabled:cursor-not-allowed inline-flex items-center gap-2"
               >
                 {asking && (
                   <span
                     aria-hidden
-                    className="inline-block w-3 h-3 rounded-full border-2 border-paper-soft/40 border-t-paper-soft animate-spin"
+                    className="inline-block w-3 h-3 rounded-full border-2 border-paper/40 border-t-paper animate-spin"
                   />
                 )}
                 {asking ? "Le coach réfléchit..." : "Demander"}

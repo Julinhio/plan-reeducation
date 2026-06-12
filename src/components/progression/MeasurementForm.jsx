@@ -33,7 +33,7 @@ export default function MeasurementForm({ onSubmit }) {
   return (
     <form
       onSubmit={handleSubmit}
-      className="bg-paper-card border border-rule-soft rounded-xl p-5 flex flex-col gap-4"
+      className="bg-paper-card border border-rule-soft rounded-2xl p-5 flex flex-col gap-4"
     >
       <header>
         <p className="overline text-ink-mute">Nouvelle mesure</p>
@@ -84,7 +84,7 @@ export default function MeasurementForm({ onSubmit }) {
       <button
         type="submit"
         disabled={busy}
-        className="self-start px-4 py-2 rounded-lg bg-ink text-paper-soft text-sm font-medium btn-press hover:bg-teal-deep disabled:opacity-60"
+        className="self-start px-4 py-2 rounded-lg bg-accent text-paper text-sm font-medium btn-press hover:bg-accent-bright disabled:opacity-60"
       >
         {busy ? "Enregistrement..." : "Ajouter la mesure"}
       </button>

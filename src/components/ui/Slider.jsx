@@ -29,7 +29,7 @@ export default function Slider({
         step={step}
         value={value ?? min}
         onChange={(e) => onChange(Number(e.target.value))}
-        className="w-full accent-teal cursor-pointer"
+        className="w-full accent-accent cursor-pointer"
       />
     </div>
   );
