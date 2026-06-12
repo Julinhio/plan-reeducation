@@ -7,7 +7,7 @@ import Stepper from "./components/shell/Stepper.jsx";
 import ViewTabs from "./components/shell/ViewTabs.jsx";
 import Footer from "./components/shell/Footer.jsx";
 import PhaseReader from "./components/reading/PhaseReader.jsx";
-import TrackingView from "./components/tracking/TrackingView.jsx";
+import ExercicesView from "./components/exercices/ExercicesView.jsx";
 import JournalView from "./components/journal/JournalView.jsx";
 import ProgressionView from "./components/progression/ProgressionView.jsx";
 import CriteriaView from "./components/criteria/CriteriaView.jsx";
@@ -21,7 +21,7 @@ export default function App() {
   const activePhase = getPhaseById(activePhaseId);
   const isUpcoming = activePhase.meta.status === "upcoming";
   const disabledViews = isUpcoming
-    ? ["tracking", "journal", "progression", "criteria", "coach"]
+    ? ["exercices", "journal", "progression", "criteria", "coach"]
     : [];
 
   useEffect(() => {
@@ -70,8 +70,8 @@ export default function App() {
             {activeView === "reading" && (
               <PhaseReader phase={activePhase} />
             )}
-            {activeView === "tracking" && !isUpcoming && (
-              <TrackingView phase={activePhase} />
+            {activeView === "exercices" && !isUpcoming && (
+              <ExercicesView phase={activePhase} />
             )}
             {activeView === "journal" && !isUpcoming && <JournalView />}
             {activeView === "progression" && !isUpcoming && (

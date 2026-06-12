@@ -70,7 +70,7 @@ export default function TocSidebar({ items }) {
       >
         <span
           aria-hidden
-          className="hidden lg:block absolute -left-px w-0.5 bg-teal transition-all duration-200 ease-out"
+          className="hidden lg:block absolute -left-px w-0.5 bg-accent transition-all duration-200 ease-out"
           style={{
             top: `${indicator.top}px`,
             height: `${indicator.height}px`,
@@ -91,7 +91,7 @@ export default function TocSidebar({ items }) {
                   "lg:px-4 lg:py-2",
                   "px-3 py-1.5 lg:rounded-r-sm rounded-md bg-paper-card lg:bg-transparent border border-rule-soft lg:border-0",
                   isActive
-                    ? "text-teal-deep font-medium"
+                    ? "text-accent-bright font-medium"
                     : "text-ink-mute hover:text-ink",
                 ].join(" ")}
               >

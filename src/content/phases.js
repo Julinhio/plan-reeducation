@@ -17,8 +17,5 @@ export function getPhaseById(id) {
 export function getActiveExercises(phaseId) {
   const phase = getPhaseById(phaseId);
   if (!phase) return [];
-  const exercisesSection = (phase.sections || []).find(
-    (s) => s.type === "exercises"
-  );
-  return exercisesSection ? exercisesSection.exercises : [];
+  return phase.exercises ?? [];
 }

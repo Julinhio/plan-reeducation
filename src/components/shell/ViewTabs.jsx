@@ -1,6 +1,6 @@
 const VIEWS = [
   { id: "reading", label: "Lecture" },
-  { id: "tracking", label: "Tracking" },
+  { id: "exercices", label: "Exercices" },
   { id: "journal", label: "Journal" },
   { id: "progression", label: "Progression" },
   { id: "criteria", label: "Critères" },
@@ -29,7 +29,7 @@ export default function ViewTabs({ activeView, onSelect, disabledViews }) {
                   className={[
                     "px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-sm font-medium btn-press border whitespace-nowrap",
                     isActive
-                      ? "bg-ink text-paper-soft border-ink shadow-sm"
+                      ? "bg-accent text-paper border-accent shadow-sm"
                       : isDisabled
                       ? "bg-transparent text-ink-faint border-transparent cursor-not-allowed"
                       : "bg-transparent text-ink-soft border-transparent hover:bg-paper-card hover:border-rule-soft hover:text-ink",

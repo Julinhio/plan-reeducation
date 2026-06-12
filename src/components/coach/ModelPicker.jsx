@@ -31,7 +31,7 @@ export default function ModelPicker({ value, onChange, disabled }) {
               className={[
                 "px-2.5 py-1 rounded-full font-mono text-[11px] tracking-[0.04em] btn-press border whitespace-nowrap",
                 isActive
-                  ? "bg-ink text-paper-soft border-ink"
+                  ? "bg-accent text-paper border-accent"
                   : "bg-paper-soft text-ink-soft border-rule hover:border-rule-strong hover:text-ink disabled:opacity-50 disabled:cursor-not-allowed",
               ].join(" ")}
             >

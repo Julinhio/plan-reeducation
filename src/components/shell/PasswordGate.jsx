@@ -37,7 +37,7 @@ export default function PasswordGate({ onUnlock }) {
 
         <form
           onSubmit={handleSubmit}
-          className={`bg-paper-card border border-rule-soft rounded-xl p-6 shadow-sm transition-transform ${
+          className={`bg-paper-card border border-rule-soft rounded-2xl p-6 shadow-sm transition-transform ${
             shake ? "animate-[shake_320ms_ease-out]" : ""
           }`}
         >
@@ -54,12 +54,12 @@ export default function PasswordGate({ onUnlock }) {
             onChange={(e) => setValue(e.target.value)}
             autoFocus
             autoComplete="current-password"
-            className="w-full px-3 py-2.5 rounded-lg border border-rule bg-paper-soft text-ink placeholder:text-ink-faint focus:outline-none focus:border-teal focus:ring-2 focus:ring-teal/15 transition-colors"
+            className="w-full px-3 py-2.5 rounded-lg border border-rule bg-paper-soft text-ink placeholder:text-ink-faint focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/15 transition-colors"
           />
           <button
             type="submit"
             disabled={submitting}
-            className="mt-4 w-full px-4 py-2.5 rounded-lg bg-ink text-paper-soft font-medium tracking-wide btn-press hover:bg-teal-deep disabled:opacity-60"
+            className="mt-4 w-full px-4 py-2.5 rounded-lg bg-accent text-paper font-medium tracking-wide btn-press hover:bg-accent-bright disabled:opacity-60"
           >
             Entrer
           </button>

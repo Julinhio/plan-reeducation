@@ -8,6 +8,7 @@ import {
   CartesianGrid,
 } from "recharts";
 import { formatShort } from "../../lib/dates.js";
+import { chartTheme, lineAccents } from "../../lib/chartTheme.js";
 
 export default function MeasurementCharts({ measurements }) {
   if (!measurements.length) {
@@ -43,7 +44,7 @@ export default function MeasurementCharts({ measurements }) {
       <ChartCard
         title="Qualité contraction VMO"
         subtitle="1 à 10, plus haut = mieux"
-        accent="teal"
+        accent="accent"
         data={data}
         dataKey="vmo"
         unit="/10"
@@ -53,16 +54,10 @@ export default function MeasurementCharts({ measurements }) {
   );
 }
 
-const ACCENT = {
-  teal: { stroke: "#2c5d6d", fill: "rgba(44, 93, 109, 0.08)" },
-  amber: { stroke: "#b4843f", fill: "rgba(180, 132, 63, 0.08)" },
-  moss: { stroke: "#5a7558", fill: "rgba(90, 117, 88, 0.08)" },
-};
-
 function ChartCard({ title, subtitle, accent, data, dataKey, unit, yDomain, invert }) {
-  const a = ACCENT[accent] ?? ACCENT.teal;
+  const a = lineAccents[accent] ?? lineAccents.accent;
   return (
-    <article className="bg-paper-card border border-rule-soft rounded-xl p-4 sm:p-5">
+    <article className="bg-paper-card border border-rule-soft rounded-2xl p-4 sm:p-5">
       <header className="mb-3">
         <p className="overline text-ink-mute">{title}</p>
         <p className="text-xs text-ink-mute mt-0.5">{subtitle}</p>
@@ -70,33 +65,34 @@ function ChartCard({ title, subtitle, accent, data, dataKey, unit, yDomain, inve
       <div className="h-56">
         <ResponsiveContainer width="100%" height="100%">
           <LineChart data={data} margin={{ top: 12, right: 8, left: 0, bottom: 0 }}>
-            <CartesianGrid strokeDasharray="3 6" stroke="#e7e0d0" vertical={false} />
+            <CartesianGrid strokeDasharray="3 6" stroke={chartTheme.grid} vertical={false} />
             <XAxis
               dataKey="label"
-              stroke="#7e8893"
+              stroke={chartTheme.axis}
               fontSize={11}
               tickLine={false}
-              axisLine={{ stroke: "#d8d1c0" }}
+              axisLine={{ stroke: chartTheme.axisLine }}
             />
             <YAxis
-              stroke="#7e8893"
+              stroke={chartTheme.axis}
               fontSize={11}
               tickLine={false}
-              axisLine={{ stroke: "#d8d1c0" }}
+              axisLine={{ stroke: chartTheme.axisLine }}
               domain={yDomain}
               reversed={invert}
               allowDecimals={false}
             />
             <Tooltip
               contentStyle={{
-                background: "#fdfbf6",
-                border: "1px solid #d8d1c0",
-                borderRadius: 8,
+                background: chartTheme.tooltipBg,
+                border: `1px solid ${chartTheme.tooltipBorder}`,
+                borderRadius: 10,
                 fontSize: 12,
                 fontFamily: "var(--font-mono)",
+                color: "#f7f8f9",
               }}
               formatter={(v) => [`${v}${unit}`, title]}
-              labelStyle={{ color: "#4a5562" }}
+              labelStyle={{ color: chartTheme.tooltipLabel }}
             />
             <Line
               type="monotone"

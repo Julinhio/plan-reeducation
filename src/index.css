@@ -1,56 +1,68 @@
 @import "tailwindcss";
 
 /* =============================================================
-   Design tokens : papier crème, encre profonde, accents teal,
-   amber, moss, plum. Hérités du site statique d'origine.
+   Design tokens : dark athlétique, direction Strava / Nike.
+   Fond proche du noir, surfaces de carte un cran plus claires,
+   un seul accent vif (orange), chiffres en mono.
+
+   Conventions de nommage (héritées, rôle préservé) :
+   - ink*   = texte / premier plan (clair sur fond sombre)
+   - paper* = surfaces (sombres) : page, carte, surface enfoncée
+   - rule*  = bordures
+   - accent = accent unique, orange, pour les éléments actifs
+   - moss / amber = couleurs fonctionnelles (succès / alerte)
    ============================================================= */
 
 @theme {
-  --color-ink: #1d2832;
-  --color-ink-soft: #4a5562;
-  --color-ink-mute: #7e8893;
-  --color-ink-faint: #aab1ba;
+  /* Texte, premier plan */
+  --color-ink: #f7f8f9;       /* principal */
+  --color-ink-soft: #c5cad0;  /* secondaire lisible, corps */
+  --color-ink-mute: #9aa0a6;  /* labels, secondaire */
+  --color-ink-faint: #6b7177; /* atténué */
 
-  --color-paper: #f6f2ea;
-  --color-paper-soft: #fbf8f1;
-  --color-paper-deep: #ede7da;
-  --color-paper-card: #fdfbf6;
+  /* Surfaces */
+  --color-paper: #0e0f11;       /* fond général */
+  --color-paper-card: #17191c;  /* surface de carte */
+  --color-paper-soft: #1e2127;  /* surface relevée, champs, puces actives */
+  --color-paper-deep: #0a0b0d;  /* surface enfoncée sur carte */
 
-  --color-rule: #d8d1c0;
-  --color-rule-soft: #e7e0d0;
-  --color-rule-strong: #b9b09c;
+  /* Bordures */
+  --color-rule: #23262b;
+  --color-rule-soft: #1b1e22;
+  --color-rule-strong: #2f343b;
 
-  --color-teal: #2c5d6d;
-  --color-teal-deep: #1f4554;
-  --color-teal-soft: #6892a1;
-  --color-teal-wash: #eaf0f2;
+  /* Accent unique, orange */
+  --color-accent: #ff5a1f;
+  --color-accent-bright: #ff7a47; /* texte d'accent sur fond sombre, hover */
+  --color-accent-soft: #ff8a5c;
+  --color-accent-wash: rgba(255, 90, 31, 0.12);
 
-  --color-amber: #b4843f;
-  --color-amber-deep: #8a6326;
-  --color-amber-wash: #f5ecdb;
+  /* Fonctionnel : succès / passage (vert) */
+  --color-moss: #3fa968;
+  --color-moss-deep: #7bd39a;
+  --color-moss-wash: rgba(63, 169, 104, 0.13);
 
-  --color-moss: #5a7558;
-  --color-moss-deep: #3f5740;
-  --color-moss-wash: #ebf0e7;
+  /* Fonctionnel : alerte / prudence (ambre) */
+  --color-amber: #d98a3d;
+  --color-amber-deep: #e8b06a;
+  --color-amber-wash: rgba(217, 138, 61, 0.13);
 
-  --color-plum: #7a4d5a;
-  --color-plum-wash: #f1e6e9;
-
-  --font-display: "Newsreader", "Times New Roman", Georgia, serif;
+  --font-display: "Barlow Condensed", "Oswald", "IBM Plex Sans", system-ui, sans-serif;
   --font-body: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
 
-  --radius-xs: 4px;
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 18px;
+  /* Coins bien arrondis */
+  --radius-xs: 6px;
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
 
   --ease-out-strong: cubic-bezier(0.23, 1, 0.32, 1);
   --ease-in-out-strong: cubic-bezier(0.77, 0, 0.175, 1);
   --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
 }
 
-/* Type scale, fluide, hérité du document éditorial */
+/* Type scale, fluide */
 :root {
   --step--1: clamp(0.78rem, 0.74rem + 0.18vw, 0.85rem);
   --step-0: clamp(0.96rem, 0.92rem + 0.2vw, 1.05rem);
@@ -63,9 +75,9 @@
   --shell-max: 1120px;
   --reading-max: 68ch;
 
-  --shadow-sm: 0 1px 0 rgba(29, 40, 50, 0.04), 0 1px 2px rgba(29, 40, 50, 0.05);
-  --shadow-md: 0 1px 0 rgba(29, 40, 50, 0.04), 0 6px 18px -8px rgba(29, 40, 50, 0.12);
-  --shadow-lg: 0 1px 0 rgba(29, 40, 50, 0.04), 0 18px 48px -16px rgba(29, 40, 50, 0.22);
+  --shadow-sm: 0 1px 0 rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 2px 4px rgba(0, 0, 0, 0.3), 0 8px 22px -10px rgba(0, 0, 0, 0.6);
+  --shadow-lg: 0 4px 8px rgba(0, 0, 0, 0.35), 0 24px 56px -18px rgba(0, 0, 0, 0.7);
 }
 
 html {
@@ -87,8 +99,8 @@ body {
   color: var(--color-ink);
   background: var(--color-paper);
   background-image:
-    radial-gradient(1100px 600px at 12% -10%, rgba(44, 93, 109, 0.05), transparent 60%),
-    radial-gradient(900px 500px at 110% 10%, rgba(180, 132, 63, 0.05), transparent 60%);
+    radial-gradient(1100px 600px at 12% -10%, rgba(255, 90, 31, 0.06), transparent 60%),
+    radial-gradient(900px 500px at 110% 8%, rgba(255, 90, 31, 0.04), transparent 55%);
   background-attachment: fixed;
   font-feature-settings: "kern", "liga", "calt", "ss01";
   text-rendering: optimizeLegibility;
@@ -99,12 +111,12 @@ body {
 }
 
 ::selection {
-  background: var(--color-teal);
-  color: var(--color-paper-soft);
+  background: var(--color-accent);
+  color: #0e0f11;
 }
 
 :focus-visible {
-  outline: 2px solid var(--color-teal);
+  outline: 2px solid var(--color-accent);
   outline-offset: 3px;
   border-radius: 3px;
 }
@@ -120,6 +132,7 @@ body {
 
 .font-display {
   font-family: var(--font-display);
+  letter-spacing: 0.01em;
 }
 .font-mono {
   font-family: var(--font-mono);
@@ -128,7 +141,7 @@ body {
 .overline {
   font-family: var(--font-mono);
   font-size: 11px;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--color-ink-mute);
 }
@@ -144,12 +157,6 @@ body {
 
 .btn-press:active:not(:disabled) {
   transform: scale(0.97);
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .btn-press:hover:not(:disabled) {
-    /* couleur déterminée par classe contextuelle */
-  }
 }
 
 /* ---------- Entrée d'éléments, stagger doux ---------- */
@@ -182,14 +189,14 @@ body {
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: var(--color-teal);
-  box-shadow: 0 0 0 3px var(--color-teal-wash);
+  background: var(--color-accent);
+  box-shadow: 0 0 0 3px var(--color-accent-wash);
   animation: pulse-glow 2.6s var(--ease-in-out-strong) infinite;
 }
 
 @keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 0 3px var(--color-teal-wash); }
-  50% { box-shadow: 0 0 0 6px rgba(44, 93, 109, 0.08); }
+  0%, 100% { box-shadow: 0 0 0 3px var(--color-accent-wash); }
+  50% { box-shadow: 0 0 0 6px rgba(255, 90, 31, 0.05); }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -207,12 +214,12 @@ body {
 
 .prose-medical em.med {
   font-style: normal;
-  color: var(--color-teal-deep);
+  color: var(--color-accent-bright);
   font-weight: 500;
 }
 
 .prose-medical em.under {
-  color: var(--color-teal-deep);
+  color: var(--color-accent-bright);
   font-style: normal;
   font-weight: 600;
 }
@@ -224,12 +231,12 @@ body {
   top: 0;
   left: 50%;
   transform: translate(-50%, -120%);
-  background: var(--color-ink);
-  color: var(--color-paper-soft);
+  background: var(--color-accent);
+  color: #0e0f11;
   padding: 10px 16px;
   border-radius: 0 0 var(--radius-sm) var(--radius-sm);
   font-size: var(--step--1);
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: 0.02em;
   z-index: 100;
   transition: transform 220ms var(--ease-out-strong);
@@ -238,7 +245,7 @@ body {
 .skip-link:focus-visible {
   transform: translate(-50%, 0);
   outline-offset: -2px;
-  outline-color: var(--color-paper-soft);
+  outline-color: #0e0f11;
 }
 
 /* ---------- Markdown rendu côté coach ---------- */
@@ -257,19 +264,19 @@ body {
 .coach-markdown h3,
 .coach-markdown h4 {
   font-family: var(--font-display);
-  font-weight: 500;
-  letter-spacing: -0.01em;
+  font-weight: 600;
+  letter-spacing: 0.01em;
   color: var(--color-ink);
-  line-height: 1.25;
+  line-height: 1.2;
 }
 
-.coach-markdown h1 { font-size: 1.45rem; margin-top: 1.4em; }
-.coach-markdown h2 { font-size: 1.25rem; margin-top: 1.3em; }
-.coach-markdown h3 { font-size: 1.1rem;  margin-top: 1.2em; }
-.coach-markdown h4 { font-size: 1rem;    margin-top: 1.1em; font-weight: 600; }
+.coach-markdown h1 { font-size: 1.5rem; margin-top: 1.4em; }
+.coach-markdown h2 { font-size: 1.3rem; margin-top: 1.3em; }
+.coach-markdown h3 { font-size: 1.12rem; margin-top: 1.2em; }
+.coach-markdown h4 { font-size: 1rem; margin-top: 1.1em; font-weight: 700; }
 
 .coach-markdown p {
-  color: var(--color-ink);
+  color: var(--color-ink-soft);
 }
 
 .coach-markdown strong {
@@ -279,11 +286,11 @@ body {
 
 .coach-markdown em {
   font-style: italic;
-  color: var(--color-teal-deep);
+  color: var(--color-accent-bright);
 }
 
 .coach-markdown a {
-  color: var(--color-teal);
+  color: var(--color-accent-bright);
   text-decoration-thickness: 1px;
   text-underline-offset: 3px;
 }
@@ -303,6 +310,7 @@ body {
 .coach-markdown ul li {
   position: relative;
   padding-left: 18px;
+  color: var(--color-ink-soft);
 }
 
 .coach-markdown ul li::before {
@@ -312,13 +320,14 @@ body {
   top: 0.75em;
   width: 10px;
   height: 1px;
-  background: var(--color-teal);
-  opacity: 0.55;
+  background: var(--color-accent);
+  opacity: 0.7;
 }
 
 .coach-markdown ol {
   list-style: decimal;
   padding-left: 1.6em;
+  color: var(--color-ink-soft);
 }
 
 .coach-markdown ol li::marker {
@@ -328,7 +337,7 @@ body {
 }
 
 .coach-markdown blockquote {
-  border-left: 2px solid var(--color-rule);
+  border-left: 2px solid var(--color-accent);
   padding-left: 1em;
   color: var(--color-ink-soft);
   font-style: italic;
@@ -345,7 +354,7 @@ body {
 
 .coach-markdown pre {
   background: var(--color-paper-deep);
-  border: 1px solid var(--color-rule-soft);
+  border: 1px solid var(--color-rule);
   border-radius: var(--radius-sm);
   padding: 12px 14px;
   overflow-x: auto;
@@ -370,7 +379,7 @@ body {
 
 .coach-markdown th,
 .coach-markdown td {
-  border: 1px solid var(--color-rule-soft);
+  border: 1px solid var(--color-rule);
   padding: 6px 10px;
   text-align: left;
 }

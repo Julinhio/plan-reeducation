@@ -1,7 +1,10 @@
 // =====================================================================
 // Phase 1, Le réveil.
-// Contenu intégral fidèle au PDF d'origine, en data structurée.
-// Consommé par la vue Lecture ET la vue Tracking (exercises[].key).
+// - phase.exercises : data structurée des cartes, consommée par la vue
+//   Exercices (programme + compteur + log). Chaque exo garde sa `key`
+//   et son bloc `tracking` (cible/jour, défauts de saisie, timer).
+// - phase.sections : le document de la vue Lecture (cible, anti-assise,
+//   cadrage, règle d'or). Les exercices ne polluent plus cette liste.
 // =====================================================================
 
 export default {
@@ -18,7 +21,7 @@ export default {
 
   toc: [
     { id: "cible", label: "Cible" },
-    { id: "exercices", label: "Exercices" },
+    { id: "anti-assise", label: "Anti-assise" },
     { id: "cadrage", label: "Cadrage" },
     { id: "regle-or", label: "Règle d'or" },
   ],
@@ -30,6 +33,118 @@ export default {
       "Réveil neuromusculaire et récupération de l'extension. Zéro charge, zéro risque.",
   },
 
+  // ---- Cartes d'exercices, vue Exercices ------------------------------
+  exercises: [
+    {
+      key: "quad-set",
+      num: "01",
+      title: "Quad set",
+      tag: "ACTIVATION",
+      stats: [
+        { label: "Séries", value: "3" },
+        { label: "Reps", value: "10" },
+        { label: "Hold", value: "5 s" },
+      ],
+      frequency: "3 à 5 fois par jour",
+      consigne:
+        "Presse l'arrière du genou dans la serviette. Cherche à sentir le VMO durcir.",
+      details: [
+        "Assis ou allongé, jambe tendue, boudin de serviette sous le genou.",
+        "Effort doux, 50 à 60 %. Jamais à fond.",
+        "Reste dans ton amplitude confortable. Ne force pas sur la butée.",
+        "Astuce, commence par la jambe saine, mémorise la sensation, reproduis côté blessé.",
+      ],
+      tracking: {
+        defaultSets: 3,
+        defaultReps: 10,
+        defaultDuration: null,
+        timer: { kind: "hold", durationSec: 5, label: "Hold quad set 5 s" },
+        targetSessionsPerDay: 4,
+        unit: "session",
+      },
+    },
+    {
+      key: "slr",
+      num: "02",
+      title: "Straight leg raise",
+      tag: "VERROUILLAGE",
+      stats: [
+        { label: "Séries", value: "3" },
+        { label: "Reps", value: "10" },
+        { label: "Hold", value: "2 s" },
+      ],
+      frequency: "2 fois par jour",
+      consigne: "Verrouille le quad avant de lever. Le genou ne plie jamais.",
+      details: [
+        "Sur le dos, jambe saine pliée, jambe blessée tendue.",
+        "Quad set d'abord, genou verrouillé, avant de décoller.",
+        "Lève de 20 à 30 cm, lent. Tiens 2 s. Descends encore plus lentement.",
+        "Si le genou plie ou si ça fait mal, retour au quad set seul quelques jours.",
+      ],
+      tracking: {
+        defaultSets: 3,
+        defaultReps: 10,
+        defaultDuration: null,
+        timer: { kind: "hold", durationSec: 2, label: "Hold haut SLR 2 s" },
+        targetSessionsPerDay: 2,
+        unit: "session",
+      },
+    },
+    {
+      // Clé "amplitude" conservée : préserve l'historique de tracking
+      // déjà loggé sous cette clé (l'ancienne carte amplitude devient
+      // l'extension passive).
+      key: "amplitude",
+      num: "03",
+      title: "Extension passive",
+      tag: "AMPLITUDE",
+      stats: [{ label: "Durée", value: "2–3 min" }],
+      frequency: "2 à 3 fois par jour",
+      consigne:
+        "Talon surélevé, genou dans le vide. Laisse la gravité étirer, ne pousse pas.",
+      details: [
+        "Talon posé sur un support, genou dans le vide.",
+        "2 à 3 min, détendu, passif.",
+        "Si ça tire fort, baisse la hauteur du support.",
+      ],
+      tracking: {
+        defaultSets: null,
+        defaultReps: null,
+        defaultDuration: 150,
+        timer: { kind: "hold", durationSec: 150, label: "Extension passive" },
+        targetSessionsPerDay: 3,
+        unit: "session",
+      },
+    },
+    {
+      key: "flexion-talon",
+      num: "04",
+      title: "Flexion glissé de talon",
+      tag: "AMPLITUDE",
+      stats: [
+        { label: "Reps", value: "10" },
+        { label: "Hold", value: "5 s" },
+      ],
+      frequency: "2 fois par jour",
+      consigne:
+        "Glisse le talon vers les fesses jusqu'à ce que ça tire juste, sans douleur.",
+      details: [
+        "Allongé, serviette sous le talon pour glisser.",
+        "Va jusqu'au point où ça commence juste à tirer, jamais dans la douleur.",
+        "Tiens 5 s, reviens. Lent et contrôlé.",
+      ],
+      tracking: {
+        defaultSets: null,
+        defaultReps: 10,
+        defaultDuration: null,
+        timer: { kind: "hold", durationSec: 5, label: "Hold flexion 5 s" },
+        targetSessionsPerDay: 2,
+        unit: "session",
+      },
+    },
+  ],
+
+  // ---- Document, vue Lecture ------------------------------------------
   sections: [
     {
       id: "cible",
@@ -47,90 +162,14 @@ export default {
     },
 
     {
-      id: "exercices",
-      type: "exercises",
+      id: "anti-assise",
+      type: "callout",
       overlineNum: "§ 02",
-      overlineLabel: "Les exercices de la phase 1",
-      title: "Trois exercices, et la règle anti-assise",
+      overlineLabel: "L'autre levier de la phase 1",
+      title: "La règle anti-assise",
       lede:
-        "Petites doses, fréquentes, jamais douloureuses. La qualité prime sur la quantité, <strong>10 cm parfaitement verrouillés valent mieux que 40 cm mollassons.</strong>",
-      exercises: [
-        {
-          key: "quad-set",
-          num: "Exercice 01",
-          title: "Quad set",
-          italic: "contraction isométrique",
-          tags: [{ label: "Pilier · Connexion", variant: "teal" }],
-          goal:
-            "<strong>But,</strong> retrouver le signal nerveux et rallumer le VMO.",
-          steps: [
-            "Assis ou allongé, jambe tendue, petit boudin de serviette sous le genou.",
-            "Pousse doucement l'arrière du genou dans la serviette en contractant la cuisse, comme pour <strong>presser une éponge</strong>. Mouvement minuscule.",
-            'Reste dans ton amplitude actuelle confortable. <em class="under">On ne va PAS chercher les degrés manquants</em> en forçant sur la butée. Les degrés reviendront seuls quand le muscle se rallumera.',
-            "Tu dois voir la rotule remonter légèrement et chercher à sentir le VMO, la goutte interne, durcir.",
-            "Effort <strong>doux, 50 à 60 %</strong> de ta force. Pas de contraction maximale.",
-          ],
-          note:
-            "<strong>Astuce qui débloque,</strong> commence par 5 contractions sur la <strong>jambe saine</strong>, mémorise la sensation, puis reproduis-la côté blessé. On apprend par le côté sain.",
-          dosage:
-            "Tenir <strong>5 s</strong>, relâcher 3 à 5 s. Séries de <strong>10</strong>. <strong>3 séries</strong> par session, 1 min de repos entre séries. <strong>3 à 5 fois par jour</strong>, petites doses fréquentes valent mieux qu'une grosse séance. Faisable au bureau.",
-          tracking: {
-            defaultSets: 3,
-            defaultReps: 10,
-            timer: { kind: "hold", durationSec: 5, label: "Hold quad set 5s" },
-            targetSessionsPerDay: 4,
-            unit: "session",
-          },
-        },
-        {
-          key: "slr",
-          num: "Exercice 02",
-          title: "Straight leg raise",
-          italic: "lever de jambe tendue",
-          tags: [{ label: "Pilier · Verrouillage", variant: "teal" }],
-          goal:
-            "<strong>But,</strong> travailler le quad dynamiquement sans toucher à la zone qui coince, et renforcer le verrouillage en extension.",
-          steps: [
-            "Allongé sur le dos. Jambe saine pliée, pied à plat. Jambe blessée tendue.",
-            '<strong>D\'abord</strong> un quad set, verrouille le quad, genou bien tendu, <em class="under">avant</em> de décoller la jambe.',
-            "Lève la jambe tendue de 20 à 30 cm, lentement. Tiens 1 à 2 s en haut. Redescends <strong>encore plus lentement</strong>.",
-            'Règle absolue, le genou <em class="under">ne plie jamais</em> pendant le mouvement. Mieux vaut 10 cm avec un genou parfaitement verrouillé que 40 cm avec un genou qui mollit.',
-          ],
-          dosage: "<strong>3 séries de 10</strong>, 2 fois par jour.",
-          fallback:
-            "Si le genou plie dès que tu lèves, ou si ça fait mal, tu n'es pas prêt. Reste au quad set seul quelques jours et réessaie.",
-          tracking: {
-            defaultSets: 3,
-            defaultReps: 10,
-            timer: { kind: "hold", durationSec: 2, label: "Hold haut SLR 2s" },
-            targetSessionsPerDay: 2,
-            unit: "session",
-          },
-        },
-        {
-          key: "amplitude",
-          num: "Exercice 03",
-          title: "Travail d'amplitude",
-          italic: "passif, en douceur",
-          tags: [{ label: "Amplitude", variant: "plum" }],
-          goal:
-            "<strong>But,</strong> regagner les 2-3 degrés qui manquent aux deux bouts, sans forcer. Mouvements passifs, c'est la gravité et la position qui travaillent, pas le muscle.",
-          steps: [
-            '<strong>Extension, talon surélevé.</strong> Allongé ou assis, talon posé sur un support, coussin ou accoudoir, genou <em class="under">dans le vide</em>. Laisse le poids de la cuisse étirer doucement l\'arrière du genou. Ne pousse pas. 2 à 3 min, détendu. Si ça tire fort, baisse la hauteur du support.',
-            '<strong>Flexion, glissé de talon.</strong> Allongé, fais glisser le talon vers les fesses, serviette sous le talon pour glisser, jusqu\'au point où ça commence juste à tirer, <em class="under">sans douleur</em>. Tiens 5 s, reviens. Lent et contrôlé.',
-          ],
-          dosage:
-            "Extension passive <strong>2 à 3 fois par jour</strong>. Glissé de talon environ 10 répétitions, <strong>2 fois par jour</strong>.",
-          tracking: {
-            defaultSets: 1,
-            defaultReps: 10,
-            timer: null,
-            targetSessionsPerDay: 2,
-            unit: "session",
-          },
-        },
-      ],
-      ruleCallout: {
+        "Aussi importante que les exercices, et hors du programme du jour, parce qu'elle se joue toute la journée.",
+      callout: {
         variant: "rule",
         label: "Règle anti-assise",
         intro:

@@ -2,8 +2,8 @@ import Html from "../ui/Html.jsx";
 
 export default function TestCard({ test }) {
   return (
-    <article className="bg-paper-card border border-rule-soft rounded-xl p-5 sm:p-6 flex flex-col gap-3 transition-all duration-200 ease-out hover:border-rule-strong hover:-translate-y-px hover:shadow-md">
-      <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-teal-deep">
+    <article className="bg-paper-card border border-rule-soft rounded-2xl p-5 sm:p-6 flex flex-col gap-3 transition-all duration-200 ease-out hover:border-rule-strong hover:-translate-y-px hover:shadow-md">
+      <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-accent-bright">
         {test.label}
       </p>
       <h4 className="font-display text-lg font-medium text-ink leading-snug -mt-1">

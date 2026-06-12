@@ -57,7 +57,7 @@ export default function JournalHistory({
               className={[
                 "group relative bg-paper-card border rounded-lg transition-colors",
                 isCurrent
-                  ? "border-teal"
+                  ? "border-accent"
                   : "border-rule-soft hover:border-rule-strong",
                 isPending ? "border-amber/40 bg-amber-wash/30" : "",
               ].join(" ")}
@@ -126,7 +126,7 @@ export default function JournalHistory({
                       type="button"
                       onClick={() => confirmDelete(e.entry_date)}
                       disabled={busyDelete}
-                      className="px-3 py-1 rounded-full text-xs font-medium bg-amber-deep text-paper-soft hover:bg-amber-deep/90 btn-press disabled:opacity-60"
+                      className="px-3 py-1 rounded-full text-xs font-medium bg-amber-deep text-paper hover:bg-amber-deep/90 btn-press disabled:opacity-60"
                     >
                       {busyDelete ? "..." : "Supprimer"}
                     </button>

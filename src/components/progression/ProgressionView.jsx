@@ -37,7 +37,7 @@ export default function ProgressionView({ phase }) {
             <MeasurementCharts measurements={measurements} />
           )}
           {measurements.length > 0 && (
-            <details className="bg-paper-card border border-rule-soft rounded-xl">
+            <details className="bg-paper-card border border-rule-soft rounded-2xl">
               <summary className="cursor-pointer px-4 py-3 text-sm font-medium text-ink-soft hover:text-ink select-none">
                 Historique des mesures, {measurements.length}
               </summary>

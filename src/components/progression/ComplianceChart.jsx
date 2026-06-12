@@ -11,8 +11,9 @@ import {
 import { subDays } from "date-fns";
 import { toDateKey, formatShort } from "../../lib/dates.js";
 import { useSessionsRange } from "../../hooks/useSessions.js";
+import { chartTheme, seriesColors } from "../../lib/chartTheme.js";
 
-const COLORS = ["#2c5d6d", "#7a4d5a", "#5a7558", "#b4843f"];
+const COLORS = seriesColors;
 
 export default function ComplianceChart({ exercises }) {
   const today = new Date();
@@ -47,7 +48,7 @@ export default function ComplianceChart({ exercises }) {
   }, [sessions, exercises]);
 
   return (
-    <article className="bg-paper-card border border-rule-soft rounded-xl p-4 sm:p-5">
+    <article className="bg-paper-card border border-rule-soft rounded-2xl p-4 sm:p-5">
       <header className="mb-3 flex items-baseline justify-between gap-2 flex-wrap">
         <div>
           <p className="overline text-ink-mute">Compliance, 14 derniers jours</p>
@@ -82,32 +83,34 @@ export default function ComplianceChart({ exercises }) {
             >
               <CartesianGrid
                 strokeDasharray="3 6"
-                stroke="#e7e0d0"
+                stroke={chartTheme.grid}
                 vertical={false}
               />
               <XAxis
                 dataKey="label"
-                stroke="#7e8893"
+                stroke={chartTheme.axis}
                 fontSize={11}
                 tickLine={false}
-                axisLine={{ stroke: "#d8d1c0" }}
+                axisLine={{ stroke: chartTheme.axisLine }}
               />
               <YAxis
                 allowDecimals={false}
-                stroke="#7e8893"
+                stroke={chartTheme.axis}
                 fontSize={11}
                 tickLine={false}
-                axisLine={{ stroke: "#d8d1c0" }}
+                axisLine={{ stroke: chartTheme.axisLine }}
               />
               <Tooltip
+                cursor={{ fill: "rgba(255,255,255,0.04)" }}
                 contentStyle={{
-                  background: "#fdfbf6",
-                  border: "1px solid #d8d1c0",
-                  borderRadius: 8,
+                  background: chartTheme.tooltipBg,
+                  border: `1px solid ${chartTheme.tooltipBorder}`,
+                  borderRadius: 10,
                   fontSize: 12,
                   fontFamily: "var(--font-mono)",
+                  color: "#f7f8f9",
                 }}
-                labelStyle={{ color: "#4a5562" }}
+                labelStyle={{ color: chartTheme.tooltipLabel }}
               />
               {keys.map((key, i) => (
                 <Bar

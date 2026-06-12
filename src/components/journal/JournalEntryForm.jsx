@@ -63,7 +63,7 @@ export default function JournalEntryForm({ dateKey, entry, onSave }) {
   return (
     <form
       onSubmit={handleSubmit}
-      className="bg-paper-card border border-rule-soft rounded-xl p-5 sm:p-7 flex flex-col gap-5"
+      className="bg-paper-card border border-rule-soft rounded-2xl p-5 sm:p-7 flex flex-col gap-5"
     >
       <div>
         <Label>État du genou au réveil</Label>
@@ -121,7 +121,7 @@ export default function JournalEntryForm({ dateKey, entry, onSave }) {
         <button
           type="submit"
           disabled={busy}
-          className="px-5 py-2.5 rounded-lg bg-ink text-paper-soft text-sm font-medium btn-press hover:bg-teal-deep disabled:opacity-60"
+          className="px-5 py-2.5 rounded-lg bg-accent text-paper text-sm font-medium btn-press hover:bg-accent-bright disabled:opacity-60"
         >
           {busy ? "Enregistrement..." : entry ? "Mettre à jour" : "Enregistrer"}
         </button>
