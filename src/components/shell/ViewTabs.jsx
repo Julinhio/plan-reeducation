@@ -9,7 +9,7 @@ const VIEWS = [
 
 export default function ViewTabs({ activeView, onSelect, disabledViews }) {
   return (
-    <div className="sticky top-[60px] sm:top-[68px] z-30 bg-paper/80 backdrop-blur-md backdrop-saturate-150 border-b border-rule-soft no-print">
+    <div className="sticky top-[68px] sm:top-[80px] z-30 bg-paper/80 backdrop-blur-md backdrop-saturate-150 border-b border-rule-soft no-print">
       <div className="shell">
         <ol
           role="tablist"
