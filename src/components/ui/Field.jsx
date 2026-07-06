@@ -9,14 +9,15 @@ export function Label({ children, htmlFor, className = "" }) {
   );
 }
 
-export function NumberInput({ value, onChange, min = 0, max, id, placeholder }) {
+export function NumberInput({ value, onChange, min = 0, max, step = 1, id, placeholder }) {
   return (
     <input
       id={id}
       type="number"
-      inputMode="numeric"
+      inputMode={step === 1 ? "numeric" : "decimal"}
       min={min}
       max={max}
+      step={step}
       placeholder={placeholder}
       value={value ?? ""}
       onChange={(e) =>
