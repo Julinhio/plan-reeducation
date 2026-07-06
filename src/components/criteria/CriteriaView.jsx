@@ -82,7 +82,7 @@ export default function CriteriaView({ targetPhase }) {
                 <article
                   className={`bg-paper-card rounded-2xl p-5 sm:p-6 border transition-colors duration-200 ${s.card}`}
                 >
-                  <div className="flex items-start justify-between gap-4 flex-wrap">
+                  <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
                     <div className="min-w-0 flex-1">
                       <div className="flex items-center gap-2.5 mb-1">
                         <span className={`w-2 h-2 rounded-full ${s.dot}`} />
