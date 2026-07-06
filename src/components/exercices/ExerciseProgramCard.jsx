@@ -1,7 +1,12 @@
 import { useMemo, useState } from "react";
 import TimerWidget from "../tracking/TimerWidget.jsx";
 import Slider from "../ui/Slider.jsx";
-import { Label, NumberInput, Textarea } from "../ui/Field.jsx";
+import { ChoiceChips, Label, NumberInput, Textarea } from "../ui/Field.jsx";
+
+const LIMB_OPTIONS = [
+  { value: "op", label: "Opérée" },
+  { value: "sain", label: "Saine" },
+];
 
 export default function ExerciseProgramCard({
   exercise,
@@ -12,9 +17,12 @@ export default function ExerciseProgramCard({
   onRemove,
 }) {
   const t = exercise.tracking ?? {};
+  const isBfr = Boolean(exercise.bfr);
   const [sets, setSets] = useState(t.defaultSets ?? null);
   const [reps, setReps] = useState(t.defaultReps ?? null);
   const [duration, setDuration] = useState(t.defaultDuration ?? null);
+  const [lop, setLop] = useState(t.defaultLop ?? null);
+  const [limb, setLimb] = useState("op");
   const [sensation, setSensation] = useState(7);
   const [notes, setNotes] = useState("");
   const [busy, setBusy] = useState(false);
@@ -39,6 +47,8 @@ export default function ExerciseProgramCard({
     setSets(t.defaultSets ?? null);
     setReps(t.defaultReps ?? null);
     setDuration(t.defaultDuration ?? null);
+    setLop(t.defaultLop ?? null);
+    setLimb("op");
     setSensation(7);
     setNotes("");
   }
@@ -54,6 +64,9 @@ export default function ExerciseProgramCard({
         sets,
         reps,
         duration_sec: duration,
+        with_bfr: isBfr,
+        lop_percent: isBfr ? lop : null,
+        limb: isBfr ? limb : "op",
         sensation,
         notes: notes || null,
       });
@@ -87,11 +100,18 @@ export default function ExerciseProgramCard({
           <h3 className="font-display text-xl sm:text-2xl font-semibold text-ink leading-tight">
             {exercise.title}
           </h3>
-          {exercise.tag && (
-            <span className="mt-1.5 inline-flex items-center font-mono text-[10px] uppercase tracking-[0.16em] px-2 py-1 rounded-full bg-paper-deep text-ink-mute border border-rule-soft leading-none">
-              {exercise.tag}
-            </span>
-          )}
+          <span className="mt-1.5 inline-flex items-center gap-1.5 flex-wrap">
+            {exercise.tag && (
+              <span className="inline-flex items-center font-mono text-[10px] uppercase tracking-[0.16em] px-2 py-1 rounded-full bg-paper-deep text-ink-mute border border-rule-soft leading-none">
+                {exercise.tag}
+              </span>
+            )}
+            {isBfr && (
+              <span className="inline-flex items-center font-mono text-[10px] uppercase tracking-[0.16em] px-2 py-1 rounded-full bg-accent-wash text-accent-bright border border-accent/25 leading-none">
+                {exercise.bfr.lopTarget}
+              </span>
+            )}
+          </span>
         </div>
 
         <DayCounter done={done} target={target} complete={complete} />
@@ -187,6 +207,11 @@ export default function ExerciseProgramCard({
                   </span>
                 )}
                 {s.duration_sec != null && <span>{s.duration_sec}s</span>}
+                {s.with_bfr && s.lop_percent != null && (
+                  <span className="text-accent-bright">
+                    {s.lop_percent}% LOP{s.limb === "sain" ? " · saine" : ""}
+                  </span>
+                )}
                 {typeof s.sensation === "number" && (
                   <span className="text-accent-bright">{s.sensation}/10</span>
                 )}
@@ -254,6 +279,30 @@ export default function ExerciseProgramCard({
               />
             </div>
           </div>
+          {isBfr && (
+            <div className="grid grid-cols-2 gap-3 items-end">
+              <div className="flex flex-col gap-1.5">
+                <Label htmlFor={`${exercise.key}-lop`}>% LOP du jour</Label>
+                <NumberInput
+                  id={`${exercise.key}-lop`}
+                  value={lop}
+                  onChange={setLop}
+                  min={10}
+                  max={100}
+                  placeholder="45"
+                />
+              </div>
+              <div className="flex flex-col gap-1.5">
+                <Label>Jambe</Label>
+                <ChoiceChips
+                  value={limb}
+                  onChange={(v) => setLimb(v ?? "op")}
+                  options={LIMB_OPTIONS}
+                  allowClear={false}
+                />
+              </div>
+            </div>
+          )}
           <Slider
             id={`${exercise.key}-sens`}
             label="Sensation"

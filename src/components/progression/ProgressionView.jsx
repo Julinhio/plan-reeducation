@@ -17,7 +17,8 @@ export default function ProgressionView({ phase }) {
           Tendances et mesures
         </h2>
         <p className="text-sm text-ink-soft mt-1 max-w-prose">
-          Compliance, sensation VMO, déficit d'extension. Juste l'essentiel pour voir si on avance.
+          Compliance, circonférence de cuisse, amplitudes, VMO. Les mesures qui
+          disent si la rééduc avance vraiment.
         </p>
       </header>
 
@@ -48,19 +49,37 @@ export default function ProgressionView({ phase }) {
                   .map((m) => (
                     <li
                       key={m.id}
-                      className="grid grid-cols-[auto_1fr_auto_auto_auto] items-baseline gap-3 text-xs font-mono py-2 border-t border-rule-soft"
+                      className="grid grid-cols-[auto_1fr_auto] items-baseline gap-3 text-xs font-mono py-2 border-t border-rule-soft"
                     >
                       <span className="text-ink-mute">
                         {formatShort(m.measured_on)}
                       </span>
-                      <span className="text-ink-soft truncate">
-                        {m.notes || "—"}
-                      </span>
-                      <span className="text-ink tabular-nums">
-                        Ext {m.extension_deficit_degrees ?? "—"}°
-                      </span>
-                      <span className="text-ink tabular-nums">
-                        VMO {m.vmo_quality ?? "—"}/10
+                      <span className="text-ink-soft min-w-0">
+                        <span className="flex flex-wrap gap-x-3 gap-y-0.5 tabular-nums">
+                          {m.thigh_circ_op_cm != null && (
+                            <span className="text-ink">
+                              Cuisse {Number(m.thigh_circ_op_cm)}
+                              {m.thigh_circ_sain_cm != null &&
+                                `/${Number(m.thigh_circ_sain_cm)}`}{" "}
+                              cm
+                            </span>
+                          )}
+                          {m.flexion_active_degrees != null && (
+                            <span>Flex {m.flexion_active_degrees}°</span>
+                          )}
+                          {m.extension_deficit_degrees != null && (
+                            <span>Ext -{Number(m.extension_deficit_degrees)}°</span>
+                          )}
+                          {m.vmo_quality != null && (
+                            <span>VMO {m.vmo_quality}/10</span>
+                          )}
+                          {m.weight_kg != null && (
+                            <span>{Number(m.weight_kg)} kg</span>
+                          )}
+                          {m.notes && (
+                            <span className="text-ink-mute truncate">{m.notes}</span>
+                          )}
+                        </span>
                       </span>
                       <button
                         type="button"

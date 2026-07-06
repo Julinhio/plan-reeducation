@@ -6,7 +6,12 @@
 // =====================================================================
 
 import { createClient } from "@supabase/supabase-js";
-import { USER_PROFILE, KNEE_HISTORY, COACH_ROLE } from "./coach-context.js";
+import {
+  USER_PROFILE,
+  KNEE_HISTORY,
+  COACH_ROLE,
+  SURGERY_DATE,
+} from "./coach-context.js";
 
 const SUPABASE_URL =
   process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL;
@@ -29,9 +34,10 @@ const ALLOWED_MODELS = new Set([
 
 const PRESET_LABELS = {
   weekly: "Bilan de la semaine",
-  phase_check: "Suis-je prêt pour la phase 2",
-  kine_synthesis: "Synthèse pour mon kiné",
+  phase_check: "Point critères de phase",
+  kine_synthesis: "Synthèse pour kiné / médecin",
   patterns: "Identifier les patterns",
+  rdv_prep: "Préparer le prochain RDV",
   free: "Question libre",
   custom: "Question libre",
 };
@@ -109,6 +115,7 @@ export default async function handler(req, res) {
       supabase
         .from("phase_criteria")
         .select("*")
+        .eq("active", true)
         .order("target_phase", { ascending: true })
         .order("order_index", { ascending: true }),
       supabase
@@ -208,10 +215,13 @@ function buildSystemPrompt({
   return [
     COACH_ROLE,
     "",
+    "# Situation du jour",
+    formatTodaySection(),
+    "",
     "# Profil utilisateur",
     USER_PROFILE,
     "",
-    "# Historique du genou",
+    "# Historique du genou et plan de rééducation",
     KNEE_HISTORY,
     "",
     "# Données actuelles, 60 derniers jours",
@@ -220,6 +230,20 @@ function buildSystemPrompt({
     "# Tes analyses précédentes",
     memorySection,
   ].join("\n");
+}
+
+function formatTodaySection() {
+  const now = new Date();
+  const dayKey = now.toISOString().slice(0, 10);
+  const days = Math.floor(
+    (Date.parse(dayKey) - Date.parse(SURGERY_DATE)) / 86400000
+  );
+  let phase = 1;
+  if (days > 122) phase = 5;
+  else if (days > 90) phase = 4;
+  else if (days > 45) phase = 3;
+  else if (days > 21) phase = 2;
+  return `Nous sommes le ${dayKey}, soit J+${days} post-opératoire (chirurgie du ${SURGERY_DATE}). Phase calendaire du protocole Palmieri : phase ${phase}. La progression réelle reste criteriée : croise avec les critères de passage ci-dessous.`;
 }
 
 function formatDataSection({ sessions, journal, measurements, criteria }) {
@@ -236,6 +260,13 @@ function formatDataSection({ sessions, journal, measurements, criteria }) {
         const bits = [s.exercise_key];
         if (s.sets && s.reps) bits.push(`${s.sets}×${s.reps}`);
         if (s.duration_sec) bits.push(`${s.duration_sec}s`);
+        if (s.with_bfr) {
+          bits.push(
+            `BFR${s.lop_percent ? ` ${s.lop_percent}% LOP` : ""}${
+              s.limb === "sain" ? " (jambe saine)" : ""
+            }`
+          );
+        }
         if (typeof s.sensation === "number")
           bits.push(`sensation ${s.sensation}/10`);
         if (s.notes) bits.push(`note: ${s.notes}`);
@@ -270,10 +301,19 @@ function formatDataSection({ sessions, journal, measurements, criteria }) {
   } else {
     for (const m of measurements) {
       const bits = [];
+      if (m.thigh_circ_op_cm !== null)
+        bits.push(`cuisse opérée ${m.thigh_circ_op_cm} cm`);
+      if (m.thigh_circ_sain_cm !== null)
+        bits.push(`cuisse saine ${m.thigh_circ_sain_cm} cm`);
+      if (m.flexion_active_degrees !== null)
+        bits.push(`flexion active ${m.flexion_active_degrees}°`);
+      if (m.flexion_passive_degrees !== null)
+        bits.push(`flexion passive ${m.flexion_passive_degrees}°`);
       if (m.extension_deficit_degrees !== null)
         bits.push(`déficit extension ${m.extension_deficit_degrees}°`);
       if (typeof m.vmo_quality === "number")
         bits.push(`VMO ${m.vmo_quality}/10`);
+      if (m.weight_kg !== null) bits.push(`poids ${m.weight_kg} kg`);
       if (m.notes) bits.push(`notes: ${m.notes}`);
       parts.push(`- ${m.measured_on}: ${bits.join(", ")}`);
     }

@@ -19,13 +19,14 @@ export default function Stepper({ activePhaseId, onSelect }) {
       <div className="shell">
         <ol
           role="tablist"
-          className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3"
+          className="flex gap-2 overflow-x-auto pb-0.5 -mx-1 px-1 sm:grid sm:grid-cols-5 sm:gap-3 sm:overflow-visible sm:mx-0 sm:px-0"
         >
           {phases.map((phase, idx) => {
             const isActive = phase.meta.id === activePhaseId;
             const isUpcoming = phase.meta.status === "upcoming";
+            const isDone = phase.meta.status === "done";
             return (
-              <li key={phase.meta.id}>
+              <li key={phase.meta.id} className="flex-shrink-0 min-w-[150px] sm:min-w-0">
                 <button
                   type="button"
                   role="tab"
@@ -47,10 +48,12 @@ export default function Stepper({ activePhaseId, onSelect }) {
                       "font-mono text-[11px] font-medium tracking-[0.06em] w-6 h-6 sm:w-7 sm:h-7 rounded-full grid place-items-center border flex-shrink-0",
                       isActive
                         ? "bg-accent text-paper border-accent"
+                        : isDone
+                        ? "bg-moss-wash text-moss-deep border-moss/30"
                         : "bg-paper-deep text-ink-mute border-rule",
                     ].join(" ")}
                   >
-                    {phase.meta.number}
+                    {isDone ? "✓" : phase.meta.number}
                   </span>
                   <span className="flex flex-col gap-0.5 min-w-0">
                     <span

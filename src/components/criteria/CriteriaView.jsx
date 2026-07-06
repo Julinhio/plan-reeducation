@@ -50,11 +50,14 @@ export default function CriteriaView({ targetPhase }) {
       <header>
         <p className="overline text-ink-mute">Critères</p>
         <h2 className="font-display text-2xl sm:text-3xl font-medium text-ink mt-1 leading-tight">
-          Entrée en phase {targetPhase}
+          {targetPhase >= 6
+            ? "Retour aux sports de pivot"
+            : `Entrée en phase ${targetPhase}`}
         </h2>
         <p className="text-sm text-ink-soft mt-1 max-w-prose">
-          Coche au fil de l'eau. On ne change pas de phase tant qu'au moins les
-          critères verts ne sont pas tous validés.
+          {targetPhase >= 6
+            ? "Le juge de paix : test isocinétique, 6 mois révolus, feu vert médical. Rien ne se négocie."
+            : "Coche au fil de l'eau. La progression est criteriée, pas calendaire : on ne change pas de phase tant que tout n'est pas validé."}
         </p>
       </header>
 
