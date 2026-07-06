@@ -26,7 +26,7 @@ export const PHASE_WINDOWS = [
 export const MILESTONES = [
   {
     date: "2026-07-15",
-    label: "RDV Palmieri, Aubagne (J+15)",
+    label: "RDV Palmieri, Aubagne",
     detail:
       "Levée du pansement, feu vert phase II, question BFR, date de vol Vietnam.",
   },
@@ -38,7 +38,7 @@ export const MILESTONES = [
   },
   {
     date: "2026-08-12",
-    label: "RDV Palmieri (J+45)",
+    label: "RDV Palmieri, contrôle J45",
     detail: "Validation passage phase III. Présentiel ou visio, à négocier le 15/07.",
   },
   {
