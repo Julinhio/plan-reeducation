@@ -12,13 +12,13 @@ export default function TestCard({ test }) {
       <dl className="flex flex-col gap-3 mt-1 prose-medical">
         <div>
           <dt className="font-mono text-[10px] uppercase tracking-[0.12em] text-ink-mute mb-0.5">
-            Objectif
+            {test.goalLabel ?? "Objectif"}
           </dt>
           <Html as="dd" className="text-sm text-ink-soft leading-relaxed" html={test.goal} />
         </div>
         <div>
           <dt className="font-mono text-[10px] uppercase tracking-[0.12em] text-ink-mute mb-0.5">
-            Résultat
+            {test.resultLabel ?? "Résultat"}
           </dt>
           <Html
             as="dd"
@@ -28,7 +28,7 @@ export default function TestCard({ test }) {
         </div>
         <div>
           <dt className="font-mono text-[10px] uppercase tracking-[0.12em] text-ink-mute mb-0.5">
-            Lecture
+            {test.readingLabel ?? "Lecture"}
           </dt>
           <Html
             as="dd"

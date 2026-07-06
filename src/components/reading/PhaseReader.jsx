@@ -4,13 +4,9 @@ import TestCard from "./TestCard.jsx";
 import Callout, { CalloutHtml } from "./Callout.jsx";
 import TargetBlock from "./TargetBlock.jsx";
 import AlertTable from "./AlertTable.jsx";
-import UpcomingPanel from "./UpcomingPanel.jsx";
+import MilestoneList from "./MilestoneList.jsx";
 
 export default function PhaseReader({ phase }) {
-  if (phase.meta.status === "upcoming") {
-    return <UpcomingPanel upcoming={phase.upcoming} />;
-  }
-
   const hasToc = phase.toc && phase.toc.length > 0;
 
   return (
@@ -153,6 +149,8 @@ function SectionRenderer({ section, isFirst }) {
           )}
         </>
       )}
+
+      {section.type === "milestones" && <MilestoneList />}
 
       {section.type === "materiel" && (
         <Html
