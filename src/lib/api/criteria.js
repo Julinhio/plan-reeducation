@@ -5,6 +5,7 @@ export async function listCriteria(targetPhase) {
     .from("phase_criteria")
     .select("*")
     .eq("target_phase", targetPhase)
+    .eq("active", true)
     .order("order_index", { ascending: true });
   if (error) throw error;
   return data ?? [];
