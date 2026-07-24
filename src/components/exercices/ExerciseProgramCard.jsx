@@ -18,10 +18,7 @@ export default function ExerciseProgramCard({
 }) {
   const t = exercise.tracking ?? {};
   // BFR n'est plus imposé par l'exo : c'est une option cochable par session.
-  // exercise.bfr (présent sur les exos où le BFR est conseillé) sert de repère
-  // visuel + valeur de LOP suggérée, pas de forçage.
-  const bfrRecommended = Boolean(exercise.bfr);
-  const lopTarget = exercise.bfr?.lopTarget ?? null;
+  // La LOP suggérée à la coche vient de tracking.defaultLop (45 par défaut).
   const suggestedLop = t.defaultLop ?? 45;
   const [sets, setSets] = useState(t.defaultSets ?? null);
   const [reps, setReps] = useState(t.defaultReps ?? null);
@@ -116,11 +113,6 @@ export default function ExerciseProgramCard({
             {exercise.tag && (
               <span className="inline-flex items-center font-mono text-[10px] uppercase tracking-[0.16em] px-2 py-1 rounded-full bg-paper-deep text-ink-mute border border-rule-soft leading-none">
                 {exercise.tag}
-              </span>
-            )}
-            {bfrRecommended && (
-              <span className="inline-flex items-center font-mono text-[10px] uppercase tracking-[0.16em] px-2 py-1 rounded-full bg-accent-wash text-accent-bright border border-accent/25 leading-none">
-                BFR conseillé{lopTarget ? ` · ${lopTarget}` : ""}
               </span>
             )}
           </span>
@@ -292,12 +284,14 @@ export default function ExerciseProgramCard({
             </div>
           </div>
           <div className="flex flex-col gap-3">
-            <Toggle
-              id={`${exercise.key}-bfr`}
-              label="Sous BFR"
-              checked={withBfr}
-              onChange={toggleBfr}
-            />
+            <div>
+              <Toggle
+                id={`${exercise.key}-bfr`}
+                label="Sous BFR"
+                checked={withBfr}
+                onChange={toggleBfr}
+              />
+            </div>
             {withBfr && (
               <div className="grid grid-cols-2 gap-3 items-end">
                 <div className="flex flex-col gap-1.5">

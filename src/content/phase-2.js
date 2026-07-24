@@ -324,8 +324,32 @@ export default {
       },
     },
     {
-      key: "co-contraction",
+      key: "piscine",
       num: "11",
+      title: "Séance piscine",
+      tag: "BALNÉO",
+      stats: [{ label: "Durée", value: "20-30 min" }],
+      frequency: "Dès que la cicatrisation le permet",
+      consigne:
+        "Séance globale en eau jusqu'à mi-cuisse : la portance décharge le genou pendant qu'on retravaille marche, appuis et contrôle. On logge la durée totale, sans détailler chaque geste.",
+      details: [
+        "Battements de jambes, jambe tendue, pour relancer le quadriceps sans contrainte articulaire.",
+        "Pas latéraux sur les marches, eau jusqu'à mi-cuisse.",
+        "Montées et descentes de marche sur l'escalier de la piscine, marche contrôlée.",
+        "Descente excentrique unilatérale depuis la première marche : en appui sur la jambe opérée, descendre lentement jusqu'à ce que le pied de la jambe saine touche le fond (squat excentrique unipodal freiné par la portance).",
+      ],
+      tracking: {
+        defaultSets: null,
+        defaultReps: null,
+        defaultDuration: 1200,
+        timer: { kind: "hold", durationSec: 1200, label: "Piscine 20 min" },
+        targetSessionsPerDay: 1,
+        unit: "session",
+      },
+    },
+    {
+      key: "co-contraction",
+      num: "12",
       title: "Co-contraction quad / ischios",
       tag: "CONTRÔLE",
       stats: [
@@ -352,7 +376,7 @@ export default {
     },
     {
       key: "proprio-axe",
-      num: "12",
+      num: "13",
       title: "Proprioception dans l'axe",
       tag: "PROPRIO · FIN DE PHASE",
       stats: [
