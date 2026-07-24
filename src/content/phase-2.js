@@ -33,26 +33,31 @@ export default {
   },
 
   // ---- Cartes d'exercices, vue Exercices ------------------------------
-  // Les 5 exos BFR forment UNE séance : cuff gonflée en continu sur les
-  // 5 exos d'affilée, 3×15, 30 s de repos, plafond dur 30 min de cuff.
+  // Renforcement (01-09), mobilité (10), contrôle et proprio (11-12). Le
+  // BFR n'est plus imposé par l'exo : c'est une option cochable à chaque
+  // session (case « Sous BFR » + % LOP). Les exos qui portent un bloc
+  // `bfr` affichent un badge « BFR conseillé » et pré-remplissent la LOP ;
+  // ils correspondent à la séance Rothman type (5 exos enchaînés, cuff
+  // gonflée en continu, 3×15, 30 s de repos, plafond dur 30 min de cuff),
+  // décrite dans l'onglet Lecture.
   exercises: [
     {
       key: "bfr-slr",
       num: "01",
-      title: "SLR sous BFR",
-      tag: "BFR · SÉANCE",
-      bfr: { lopTarget: "40-50 % LOP", position: 1 },
+      title: "SLR",
+      tag: "RENFORCEMENT",
+      bfr: { lopTarget: "40-50 % LOP" },
       stats: [
         { label: "Séries", value: "3" },
         { label: "Reps", value: "15" },
         { label: "Repos", value: "30 s" },
       ],
-      frequency: "1 séance BFR par jour, 5-6 j/7 selon tolérance",
+      frequency: "1 fois par jour, 5-6 j/7 selon tolérance",
       consigne:
-        "Premier exo de la séance. Cuff calibrée via l'app SAGA, 40-50 % de LOP en début de reprise.",
+        "Jambe tendue, quad verrouillé, montée lente, descente encore plus lente. Le réveil quadricipital de base. Conseillé sous BFR (40-50 % de LOP) pour maximiser le stimulus à charge nulle.",
       details: [
         "Même geste que le SLR de phase I : quad verrouillé, montée lente, descente plus lente.",
-        "La LOP se recalibre à chaque séance (elle varie avec la tension, la position, l'heure).",
+        "Sous BFR : la LOP se recalibre à chaque séance (elle varie avec la tension, la position, l'heure).",
         "La sensation de congestion est normale ; une douleur inhabituelle ou des fourmillements ne le sont pas → dégonfler.",
         "Progression vers 60-80 % de LOP sur plusieurs semaines, une fois l'adaptation installée.",
       ],
@@ -69,15 +74,15 @@ export default {
     {
       key: "bfr-slr-lateral",
       num: "02",
-      title: "SLR latéral sous BFR",
-      tag: "BFR · SÉANCE",
-      bfr: { lopTarget: "40-50 % LOP", position: 2 },
+      title: "SLR latéral",
+      tag: "RENFORCEMENT",
+      bfr: { lopTarget: "40-50 % LOP" },
       stats: [
         { label: "Séries", value: "3" },
         { label: "Reps", value: "15" },
         { label: "Repos", value: "30 s" },
       ],
-      frequency: "Dans la séance BFR quotidienne",
+      frequency: "1 fois par jour",
       consigne:
         "Sur le côté, jambe opérée au-dessus, montée latérale jambe tendue. Cible moyen fessier + stabilité de hanche.",
       details: [
@@ -98,15 +103,15 @@ export default {
     {
       key: "bfr-tke",
       num: "03",
-      title: "Terminal knee extension sous BFR",
-      tag: "BFR · SÉANCE",
-      bfr: { lopTarget: "40-50 % LOP", position: 3 },
+      title: "Terminal knee extension (TKE)",
+      tag: "RENFORCEMENT",
+      bfr: { lopTarget: "40-50 % LOP" },
       stats: [
         { label: "Séries", value: "3" },
         { label: "Reps", value: "15" },
         { label: "Repos", value: "30 s" },
       ],
-      frequency: "Dans la séance BFR quotidienne",
+      frequency: "1 fois par jour",
       consigne:
         "Élastique derrière le genou, verrouille les derniers degrés d'extension debout. L'exo VMO par excellence.",
       details: [
@@ -128,15 +133,15 @@ export default {
     {
       key: "bfr-ham-curl",
       num: "04",
-      title: "Curl ischios léger sous BFR",
-      tag: "BFR · SÉANCE",
-      bfr: { lopTarget: "40-50 % LOP", position: 4 },
+      title: "Curl ischios léger",
+      tag: "RENFORCEMENT",
+      bfr: { lopTarget: "40-50 % LOP" },
       stats: [
         { label: "Séries", value: "3" },
         { label: "Reps", value: "15" },
         { label: "Repos", value: "30 s" },
       ],
-      frequency: "Dans la séance BFR quotidienne",
+      frequency: "1 fois par jour",
       consigne:
         "Debout ou à plat ventre, flexion du genou sans charge ou charge très légère. Vigilance site de prélèvement DT4.",
       details: [
@@ -157,22 +162,22 @@ export default {
     {
       key: "bfr-leg-press",
       num: "05",
-      title: "Leg press légère sous BFR",
-      tag: "BFR · SÉANCE",
-      bfr: { lopTarget: "40-50 % LOP", position: 5 },
+      title: "Leg press légère",
+      tag: "RENFORCEMENT",
+      bfr: { lopTarget: "40-50 % LOP" },
       stats: [
         { label: "Séries", value: "3" },
         { label: "Reps", value: "15" },
         { label: "Charge", value: "20-30 %" },
       ],
-      frequency: "Dans la séance BFR quotidienne, si presse accessible",
+      frequency: "1 fois par jour, si presse accessible",
       consigne:
         "20-30 % du 1RM estimé, secteur 0-90°. Sans presse : mini-squats bipodaux assistés en substitution.",
       details: [
-        "Dernier exo de la séance, cuff toujours gonflée.",
-        "Amplitude strictement 0-90°, poussée bipodale, contrôle total.",
+        "Poussée bipodale, amplitude strictement 0-90°, contrôle total.",
         "À HCMC : presse à identifier en salle. En attendant, mini-squats bipodaux appuyé au mur.",
-        "À 20-30 % du 1RM, le BFR produit des gains comparables à 70-80 % : ne pas charger plus.",
+        "Sous BFR, à 20-30 % du 1RM le stimulus égale 70-80 % : ne pas charger plus.",
+        "Dernier exo de la séance BFR type, cuff toujours gonflée si tu enchaînes les 5.",
       ],
       tracking: {
         defaultSets: 3,
@@ -185,8 +190,116 @@ export default {
       },
     },
     {
-      key: "velo",
+      key: "spanish-squat",
       num: "06",
+      title: "Spanish squat",
+      tag: "RENFORCEMENT",
+      stats: [
+        { label: "Séries", value: "5" },
+        { label: "Hold", value: "30 s" },
+      ],
+      frequency: "1 fois par jour, en isométrie",
+      consigne:
+        "Bande à hauteur de genou sur un point fixe, boucle derrière les deux genoux, recule pour la mettre en tension. Descends comme sur une chaise, tibias verticaux, entre 30 et 60° de flexion, et tiens. La bande tire les genoux vers l'arrière : le greffon est déchargé, tout part dans le quadriceps.",
+      details: [
+        "L'exo standard de la rééduc LCA : tension maximale sur le quad, contrainte minimale sur le greffon.",
+        "Tibias strictement verticaux, le poids passe dans les talons, le genou ne dépasse pas la pointe du pied.",
+        "Isométrique pur : 5 × 30 s de maintien pour démarrer, repos entre chaque série.",
+        "Reste dans le secteur 30-60°, jamais de descente profonde à ce stade.",
+      ],
+      tracking: {
+        defaultSets: 5,
+        defaultReps: null,
+        defaultDuration: 30,
+        timer: { kind: "hold", durationSec: 30, label: "Spanish squat 30 s" },
+        targetSessionsPerDay: 1,
+        unit: "session",
+      },
+    },
+    {
+      key: "wall-sit",
+      num: "07",
+      title: "Wall sit",
+      tag: "RENFORCEMENT",
+      stats: [
+        { label: "Séries", value: "5" },
+        { label: "Hold", value: "30 s" },
+      ],
+      frequency: "1 fois par jour, en isométrie",
+      consigne:
+        "Dos au mur, descends jusqu'à 45-60° de flexion maximum et tiens. Même logique que le Spanish squat, en plus simple. Bilatéral au début, avec report progressif du poids sur la jambe opérée.",
+      details: [
+        "Dos plaqué au mur, pieds avancés pour que les tibias restent verticaux.",
+        "Ne pas descendre sous 60° de flexion : on reste dans un secteur confortable pour le greffon.",
+        "Au début le poids est réparti sur les deux jambes ; transférer progressivement vers la jambe opérée à mesure que la confiance revient.",
+        "Isométrique : 5 × 30 s pour commencer, allonger le maintien quand c'est facile.",
+      ],
+      tracking: {
+        defaultSets: 5,
+        defaultReps: null,
+        defaultDuration: 30,
+        timer: { kind: "hold", durationSec: 30, label: "Wall sit 30 s" },
+        targetSessionsPerDay: 1,
+        unit: "session",
+      },
+    },
+    {
+      key: "step-up",
+      num: "08",
+      title: "Step-ups",
+      tag: "RENFORCEMENT",
+      stats: [
+        { label: "Séries", value: "3" },
+        { label: "Reps", value: "10" },
+      ],
+      frequency: "1 fois par jour, en charge réelle",
+      consigne:
+        "Marche basse type 15 cm, montée sur la jambe opérée, descente lente et contrôlée. Le prolongement terre de ce que tu fais sur la marche de la piscine.",
+      details: [
+        "Unilatéral : c'est la jambe opérée qui fait tout le travail, pas d'élan de l'autre jambe.",
+        "Descente lente (excentrique) : c'est là que se gagne le contrôle du quadriceps.",
+        "Marche basse (~15 cm) au départ, monter la hauteur seulement quand le contrôle est parfait et sans douleur.",
+        "Aucune bascule ni valgus : le genou reste aligné au-dessus du pied à la montée comme à la descente.",
+      ],
+      tracking: {
+        defaultSets: 3,
+        defaultReps: 10,
+        defaultDuration: null,
+        timer: null,
+        targetSessionsPerDay: 1,
+        unit: "session",
+      },
+    },
+    {
+      key: "pont-fessier",
+      num: "09",
+      title: "Ponts fessiers",
+      tag: "RENFORCEMENT",
+      stats: [
+        { label: "Séries", value: "3" },
+        { label: "Reps", value: "12" },
+      ],
+      frequency: "1 fois par jour, sans charge au début",
+      consigne:
+        "Allongé sur le dos, pieds au sol, monte le bassin en serrant les fessiers. Ça bosse les fessiers et les ischios. À introduire doucement vu le site de prélèvement DT4, sans charge au début.",
+      details: [
+        "Le greffon vient des ischio-jambiers (DT4) : toute tension ou douleur sur la face interne de la cuisse ou l'arrière du genou → réduire l'amplitude ou passer l'exo.",
+        "Montée par les fessiers, pas par les lombaires : le bassin monte, le dos reste neutre.",
+        "Sans charge au début. Progression vers l'appui unilatéral plus tard, pas maintenant.",
+        "Mouvement lent, courte pause en haut, descente maîtrisée.",
+      ],
+      tracking: {
+        defaultSets: 3,
+        defaultReps: 12,
+        defaultDuration: null,
+        timer: null,
+        targetSessionsPerDay: 1,
+        unit: "session",
+      },
+    },
+    {
+      key: "velo",
+      num: "10",
       title: "Vélo",
       tag: "MOBILITÉ",
       stats: [
@@ -211,8 +324,32 @@ export default {
       },
     },
     {
+      key: "piscine",
+      num: "11",
+      title: "Séance piscine",
+      tag: "BALNÉO",
+      stats: [{ label: "Durée", value: "20-30 min" }],
+      frequency: "Dès que la cicatrisation le permet",
+      consigne:
+        "Séance globale en eau jusqu'à mi-cuisse : la portance décharge le genou pendant qu'on retravaille marche, appuis et contrôle. On logge la durée totale, sans détailler chaque geste.",
+      details: [
+        "Battements de jambes, jambe tendue, pour relancer le quadriceps sans contrainte articulaire.",
+        "Pas latéraux sur les marches, eau jusqu'à mi-cuisse.",
+        "Montées et descentes de marche sur l'escalier de la piscine, marche contrôlée.",
+        "Descente excentrique unilatérale depuis la première marche : en appui sur la jambe opérée, descendre lentement jusqu'à ce que le pied de la jambe saine touche le fond (squat excentrique unipodal freiné par la portance).",
+      ],
+      tracking: {
+        defaultSets: null,
+        defaultReps: null,
+        defaultDuration: 1200,
+        timer: { kind: "hold", durationSec: 1200, label: "Piscine 20 min" },
+        targetSessionsPerDay: 1,
+        unit: "session",
+      },
+    },
+    {
       key: "co-contraction",
-      num: "07",
+      num: "12",
       title: "Co-contraction quad / ischios",
       tag: "CONTRÔLE",
       stats: [
@@ -239,7 +376,7 @@ export default {
     },
     {
       key: "proprio-axe",
-      num: "08",
+      num: "13",
       title: "Proprioception dans l'axe",
       tag: "PROPRIO · FIN DE PHASE",
       stats: [

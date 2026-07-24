@@ -90,7 +90,7 @@ export function Toggle({ label, checked, onChange, id }) {
       className={[
         "inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium btn-press border transition-colors",
         checked
-          ? "bg-accent-wash border-accent/40 text-accent-bright"
+          ? "bg-accent/10 border-accent/60 text-accent-bright"
           : "bg-paper-soft border-rule text-ink-soft hover:border-rule-strong",
       ].join(" ")}
     >

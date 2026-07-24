@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import TimerWidget from "../tracking/TimerWidget.jsx";
 import Slider from "../ui/Slider.jsx";
-import { ChoiceChips, Label, NumberInput, Textarea } from "../ui/Field.jsx";
+import { ChoiceChips, Label, NumberInput, Textarea, Toggle } from "../ui/Field.jsx";
 
 const LIMB_OPTIONS = [
   { value: "op", label: "Opérée" },
@@ -17,11 +17,14 @@ export default function ExerciseProgramCard({
   onRemove,
 }) {
   const t = exercise.tracking ?? {};
-  const isBfr = Boolean(exercise.bfr);
+  // BFR n'est plus imposé par l'exo : c'est une option cochable par session.
+  // La LOP suggérée à la coche vient de tracking.defaultLop (45 par défaut).
+  const suggestedLop = t.defaultLop ?? 45;
   const [sets, setSets] = useState(t.defaultSets ?? null);
   const [reps, setReps] = useState(t.defaultReps ?? null);
   const [duration, setDuration] = useState(t.defaultDuration ?? null);
-  const [lop, setLop] = useState(t.defaultLop ?? null);
+  const [withBfr, setWithBfr] = useState(false);
+  const [lop, setLop] = useState(null);
   const [limb, setLimb] = useState("op");
   const [sensation, setSensation] = useState(7);
   const [notes, setNotes] = useState("");
@@ -43,11 +46,17 @@ export default function ExerciseProgramCard({
     );
   }, [todaysSessions]);
 
+  function toggleBfr(next) {
+    setWithBfr(next);
+    if (next && lop == null) setLop(suggestedLop);
+  }
+
   function resetForm() {
     setSets(t.defaultSets ?? null);
     setReps(t.defaultReps ?? null);
     setDuration(t.defaultDuration ?? null);
-    setLop(t.defaultLop ?? null);
+    setWithBfr(false);
+    setLop(null);
     setLimb("op");
     setSensation(7);
     setNotes("");
@@ -64,9 +73,9 @@ export default function ExerciseProgramCard({
         sets,
         reps,
         duration_sec: duration,
-        with_bfr: isBfr,
-        lop_percent: isBfr ? lop : null,
-        limb: isBfr ? limb : "op",
+        with_bfr: withBfr,
+        lop_percent: withBfr ? lop : null,
+        limb: withBfr ? limb : "op",
         sensation,
         notes: notes || null,
       });
@@ -104,11 +113,6 @@ export default function ExerciseProgramCard({
             {exercise.tag && (
               <span className="inline-flex items-center font-mono text-[10px] uppercase tracking-[0.16em] px-2 py-1 rounded-full bg-paper-deep text-ink-mute border border-rule-soft leading-none">
                 {exercise.tag}
-              </span>
-            )}
-            {isBfr && (
-              <span className="inline-flex items-center font-mono text-[10px] uppercase tracking-[0.16em] px-2 py-1 rounded-full bg-accent-wash text-accent-bright border border-accent/25 leading-none">
-                {exercise.bfr.lopTarget}
               </span>
             )}
           </span>
@@ -279,30 +283,40 @@ export default function ExerciseProgramCard({
               />
             </div>
           </div>
-          {isBfr && (
-            <div className="grid grid-cols-2 gap-3 items-end">
-              <div className="flex flex-col gap-1.5">
-                <Label htmlFor={`${exercise.key}-lop`}>% LOP du jour</Label>
-                <NumberInput
-                  id={`${exercise.key}-lop`}
-                  value={lop}
-                  onChange={setLop}
-                  min={10}
-                  max={100}
-                  placeholder="45"
-                />
-              </div>
-              <div className="flex flex-col gap-1.5">
-                <Label>Jambe</Label>
-                <ChoiceChips
-                  value={limb}
-                  onChange={(v) => setLimb(v ?? "op")}
-                  options={LIMB_OPTIONS}
-                  allowClear={false}
-                />
-              </div>
+          <div className="flex flex-col gap-3">
+            <div>
+              <Toggle
+                id={`${exercise.key}-bfr`}
+                label="Sous BFR"
+                checked={withBfr}
+                onChange={toggleBfr}
+              />
             </div>
-          )}
+            {withBfr && (
+              <div className="grid grid-cols-2 gap-3 items-end">
+                <div className="flex flex-col gap-1.5">
+                  <Label htmlFor={`${exercise.key}-lop`}>% LOP du jour</Label>
+                  <NumberInput
+                    id={`${exercise.key}-lop`}
+                    value={lop}
+                    onChange={setLop}
+                    min={10}
+                    max={100}
+                    placeholder={String(suggestedLop)}
+                  />
+                </div>
+                <div className="flex flex-col gap-1.5">
+                  <Label>Jambe</Label>
+                  <ChoiceChips
+                    value={limb}
+                    onChange={(v) => setLimb(v ?? "op")}
+                    options={LIMB_OPTIONS}
+                    allowClear={false}
+                  />
+                </div>
+              </div>
+            )}
+          </div>
           <Slider
             id={`${exercise.key}-sens`}
             label="Sensation"
